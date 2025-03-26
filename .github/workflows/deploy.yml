@@ -30,7 +30,7 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          token: ${{ secrets.Hanan_PAT }}  
+          token: ${{ secrets.HANAN_PAT }}  
           branch: gh-pages
           folder: docs  # هذا هو المجلد الذي يحتوي على المستندات
           clean: true
