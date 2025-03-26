@@ -24,7 +24,8 @@
     "jsdoc": "^4.0.4",
     "parcel": "^2.14.2",
     "rimraf": "^6.0.1",
-    "sass": "^1.72.0"
+    "sass": "^1.72.0",
+    "svgo": "^3.3.2"
   },
   "browserslist": [
     ">0.2%",
@@ -37,7 +38,9 @@
     "extends": "@parcel/config-default",
     "packagers": {
       "*.js": {
-        "use": ["@parcel/packager-js"],
+        "use": [
+          "@parcel/packager-js"
+        ],
         "options": {
           "scopeHoist": false
         }
