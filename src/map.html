@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Global Disease Tracker</title>
+    <link rel="icon" type="image/x-icon" href="./assets/images/virus1.svg">
+    <link rel="stylesheet" href="./scss/main.scss">
+    <link rel="stylesheet" href="./scss/news.scss">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+</head>
+<body>
+    <header>
+      
+            <nav>
+                <div class="logo">
+                    <a href="index.html">
+                <img src="./assets/images/virus1.png" alt="Global Disease Tracker Logo" class="logo">
+                <nav>
+            </div>
+                <div class="menu-icon">&#9776;</div>
+               
+    
+                <div class="nav-links">
+                <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+                <a href="statistics.html" class="nav-link"><i class="fas fa-chart-line"></i> Statistics</a>
+                <a href="map.html" class="nav-link"><i class="fas fa-map"></i> Map</a>
+                <a href="prevention.html" class="nav-link"><i class="fas fa-shield-alt"></i> Prevention</a>
+                <a href="contact.html" class="nav-link"><i class="fas fa-envelope"></i> Contact</a>
+                <a href="news.html" class="nav-link active"><i class="fas fa-newspaper"></i> News</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- صفحة الخريطة -->
+        <section id="map">
+            <h2>Disease Spread Map</h2>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search for a country...">
+                <button id="searchButton">Search</button>
+            </div>
+            <div id="mapContainer"></div>
+        </section>
+    </main>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="./js/main.js" type="module"></script>
+  
+</body>
+</html>

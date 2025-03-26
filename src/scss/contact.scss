@@ -1,0 +1,137 @@
+@use 'sass:math';
+@use 'sass:color';
+@use 'variables' as *;
+@use 'animations';
+@use 'responsive';
+@use 'mixins';
+
+body.contact-page {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: $text-color;
+    background-color: $background-color;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+
+    #contact {
+        background: url('../assets/images/virus1.png') no-repeat center center/cover;
+        padding: 4rem 0;
+        color: white;
+        text-align: center;
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        #contactForm {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 1rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 1s ease-out;
+
+            input, textarea {
+                width: 100%;
+                padding: 0.8rem;
+                margin: 0.5rem 0;
+                border: 1px solid #ddd;
+                border-radius: 0.5rem;
+                transition: border-color 0.3s ease;
+
+                &:focus {
+                    border-color: $primary-color;
+                    outline: none;
+                }
+            }
+
+            button {
+                background: $primary-color;
+                color: white;
+                padding: 0.8rem 2rem;
+                border: none;
+                border-radius: 0.5rem;
+                cursor: pointer;
+                transition: background 0.3s ease;
+
+                &:hover {
+                    background: color.adjust($primary-color, $lightness: -10%);
+                }
+            }
+        }
+    }
+
+    .vaccine-animation {
+        position: absolute;
+        top: 50%;
+        left: -100px;
+        animation: moveVaccine 5s linear infinite;
+
+        img {
+            width: 80px;
+            height: auto;
+        }
+    }
+
+    @keyframes moveVaccine {
+        0% {
+            transform: translateX(-100px) rotate(0deg);
+        }
+        100% {
+            transform: translateX(calc(100vw + 100px)) rotate(360deg);
+        }
+    }
+
+    .floating-germs {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -1;
+
+        .germ {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.3;
+            animation: germFloat 8s infinite ease-in-out;
+            cursor: pointer;
+            transition: all 0.3s ease;
+
+            &:hover {
+                animation: germFloat 2s infinite ease-in-out;
+                filter: drop-shadow(0 0 8px $secondary-color);
+            }
+
+            @for $i from 1 through 3 {
+                &:nth-child(#{$i}) {
+                    left: math.random(90) * 1%;
+                    top: math.random(90) * 1%;
+                    animation-duration: math.random(10) + 5s;
+                }
+            }
+        }
+    }
+
+    @keyframes germFloat {
+        0% {
+            transform: translateY(0) rotate(0deg);
+        }
+        50% {
+            transform: translateY(-20px) rotate(180deg);
+        }
+        100% {
+            transform: translateY(0) rotate(360deg);
+        }
+    }
+
+    footer {
+        background-color: $primary-color;
+        color: white;
+        text-align: center;
+        padding: 1rem;
+        margin-top: 2rem;
+    }
+}

@@ -1,0 +1,34 @@
+{
+  "name": "sjukdom10",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html --no-scope-hoist",
+    "docs": "jsdoc src/js -d docs",
+    "clean-docs": "rimraf docs",
+    "generate-docs": "npm run clean-docs && npm run docs",
+    "deploy": "npm run build && gh-pages -d dist"
+  },
+  "dependencies": {
+    "chart.js": "^4.0.0",
+    "leaflet": "^1.9.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.2",
+    "@babel/preset-env": "^7.23.2",
+    "@parcel/transformer-sass": "^2.14.2",
+    "gh-pages": "^6.3.0",
+    "glob": "^11.0.1",
+    "jsdoc": "^4.0.4",
+    "parcel": "^2.14.2",
+    "rimraf": "^6.0.1",
+    "sass": "^1.72.0"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not op_mini all",
+    "last 2 versions",
+    "Firefox ESR",
+    "not dead"
+  ]
+}

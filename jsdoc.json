@@ -1,0 +1,8 @@
+{
+    "source": {
+      "include": ["src/js"]
+    },
+    "opts": {
+      "destination": "docs"
+    }
+  }

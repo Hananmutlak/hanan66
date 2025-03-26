@@ -1,0 +1,16 @@
+{
+    "extends": "@parcel/config-default",
+    "packagers": {
+      "*.js": {
+        "use": [
+          {
+            "packageName": "@parcel/packager-js",
+            "resolveFrom": "__root__"
+          }
+        ],
+        "options": {
+          "scopeHoist": false
+        }
+      }
+    }
+  }

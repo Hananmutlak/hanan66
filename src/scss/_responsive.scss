@@ -1,0 +1,21 @@
+// في ملف _responsive.scss
+@mixin mobile {
+  @media (max-width: 768px) {
+    // إضافة محاذاة للعناصر
+    .nav-links {
+      flex-direction: column !important;
+      align-items: center !important;
+      
+      a {
+        padding: 12px 0;
+        width: 100%;
+        justify-content: center;
+        
+        i {
+          margin-left: 8px; // إضافة مسافة بين الرمز والنص
+          font-size: 1.4rem !important;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,415 @@
+@use 'sass:math';
+@use 'sass:color';
+@use 'variables' as *;
+@use 'responsive';
+@use 'mixins';
+
+// دالة لتوليد القيم العشوائية
+@function random-percent($max) {
+    @return math.random($max) * 1%;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: $text-color;
+    background-color: $background-color;
+    display: flex;
+    flex-direction: column;
+}
+
+body {
+    flex: 1 0 auto;
+}
+
+header {
+    background-color: $primary-color;
+    color: white;
+    padding: 1rem;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+main {
+    flex: 1 0 auto;
+    margin-top: 80px; // تعديل للمسافة من الأعلى بعد إضافة header ثابت
+    position: relative;
+}
+
+.hero {
+    background: url('../assets/images/virus1.png') no-repeat center top/cover;
+    height: auto; // جعل الارتفاع يتكيف مع المحتوى
+    min-height: 120vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+
+    * {
+        position: relative;
+        z-index: 1;
+    }
+
+    h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+
+    p {
+        font-size: 1.2rem;
+    }
+}
+
+footer {
+    background-color: $primary-color;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1000;
+}
+
+.floating-germs {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+
+    .germ {
+        position: absolute;
+        font-size: 2rem;
+        opacity: 0.1;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+            filter: drop-shadow(0 0 8px $secondary-color);
+        }
+
+        @for $i from 1 through 3 {
+            &:nth-child(#{$i}) {
+                left: random-percent(90);
+                top: random-percent(90);
+            }
+        }
+    }
+}
+
+.prevention-cards {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    .prevention-card {
+        background: white;
+        border-radius: 1rem;
+        margin: 2rem 0;
+        box-shadow: $shadow;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        overflow: hidden;
+        transition: transform 0.3s $easing;
+
+        @include mixins.mobile {
+            grid-template-columns: 1fr;
+        }
+
+        &.reversed {
+            grid-template-columns: 1fr 1fr;
+            direction: rtl;
+
+            @include mixins.mobile {
+                grid-template-columns: 1fr;
+                direction: ltr;
+            }
+        }
+
+        .card-image {
+            position: relative;
+            overflow: hidden;
+            min-height: 300px;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.5s $easing;
+            }
+
+            .image-overlay {
+                position: absolute;
+                bottom: 1rem;
+                left: 50%;
+                transform: translateX(-50%);
+                background: rgba(0, 0, 0, 0.7);
+                color: white;
+                padding: 0.5rem 1rem;
+                border-radius: 2rem;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+
+            &:hover {
+                .image-overlay {
+                    opacity: 1;
+                }
+
+                img {
+                    transform: scale(1.05);
+                }
+            }
+        }
+
+        .card-content {
+            padding: 2rem;
+
+            h3 {
+                color: $primary-color;
+                font-size: 1.8rem;
+                margin-bottom: 1.5rem;
+                position: relative;
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    bottom: -0.5rem;
+                    left: 0;
+                    width: 3rem;
+                    height: 3px;
+                    background: $secondary-color;
+                }
+            }
+
+            .step-list {
+                .step {
+                    @include mixins.flex-center;
+                    gap: 1rem;
+                    margin: 1.5rem 0;
+                    padding: 1rem;
+                    background: rgba($secondary-color, 0.05);
+                    border-radius: 0.5rem;
+                    transition: all 0.3s ease;
+
+                    &:hover {
+                        transform: translateX(10px);
+                        background: rgba($secondary-color, 0.1);
+                    }
+
+                    i {
+                        color: $secondary-color;
+                        font-size: 1.5rem;
+                        width: 2rem;
+                        text-align: center;
+                    }
+
+                    p {
+                        margin: 0;
+                        flex: 1;
+                    }
+                }
+            }
+
+            .science-fact {
+                @include mixins.flex-center;
+                gap: 1rem;
+                margin-top: 2rem;
+                padding: 1rem;
+                background: rgba($secondary-color, 0.08);
+                border-radius: 0.5rem;
+
+                i {
+                    color: $secondary-color;
+                    font-size: 1.5rem;
+                }
+
+                p {
+                    margin: 0;
+                    font-style: italic;
+                }
+            }
+        }
+
+        &:hover {
+            transform: translateY(-5px);
+        }
+    }
+}
+
+.hero-button {
+    background: #FF6500;
+    color: white;
+    padding: 0.8rem 2rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: background 0.3s ease;
+
+    &:hover {
+        background: color.adjust(#FF6500, $lightness: -10%);
+    }
+}
+
+.social-links {
+    a {
+        color: #FF6500 !important;
+        transition: opacity 0.3s;
+
+        &:hover {
+            opacity: 0.8;
+        }
+
+        i {
+            font-size: 1.8rem;
+            margin: 0 10px;
+        }
+    }
+}
+.statistics-section {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    .disease-select {
+        padding: 0.5rem;
+        margin-bottom: 2rem;
+        border: 2px solid $primary-color;
+        border-radius: 0.5rem;
+    }
+
+    .charts-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+
+        @media (max-width: 768px) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .chart-wrapper {
+        background: white;
+        padding: 1rem;
+        border-radius: 1rem;
+        box-shadow: $shadow;
+        height: 400px;
+    }
+}header {
+    display: flex;
+    justify-content: space-between;
+    background-color: $primary-color;
+    color: white;
+    padding: 1rem;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .menu-icon {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+
+            @media (max-width: 768px) {
+                display: block;
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+
+            @media (max-width: 768px) {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                right: 0;
+                background: $primary-color;
+                width: 100%;
+                padding: 1rem;
+                text-align: center;
+
+                &.active {
+                    display: flex;
+                }
+            }
+
+            a {
+                color: white;
+                text-decoration: none;
+                font-size: 1.1rem;
+                transition: color 0.3s;
+
+                &:hover {
+                    color: $secondary-color;
+                }
+            }
+        }
+    }
+}
+.logo {
+    img {
+        height: 50px; // يمكنك تعديل الحجم حسب الحاجة
+        width: auto;
+    }
+}
+
+
+footer {
+    background-color: $primary-color;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+}
+#mapContainer {
+    height: 400px; /* الحجم الافتراضي لشاشات الكمبيوتر */
+    width: 100%;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
+    /* تصغير الحجم على الهواتف */
+    @media (max-width: 768px) {
+        height: 300px;
+    }
+    
+    @media (max-width: 480px) {
+        height: 250px;
+    }
+}
+/* تحسينات عامة للهاتف */
+@media (max-width: 768px) {
+    #map {
+        padding: 10px;
+        
+        h2 {
+            font-size: 1.5rem;
+        }
+    }
+    
+    .search-container {
+        flex-direction: column;
+        
+        input {
+            width: 100% !important;
+            margin-right: 0;
+            margin-bottom: 10px;
+        }
+    }
+}
