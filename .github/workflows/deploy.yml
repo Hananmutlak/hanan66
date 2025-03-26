@@ -19,10 +19,12 @@ jobs:
           cache: 'npm'
           
       - name: Install dependencies 📦
-        run: npm ci
+        run: |
+          npm install
+          npm install svgo --save-dev
         
       - name: Build project 🏗️
-        run: npm run build
+        run: npm run build --no-optimize --no-scope-hoist
         
       - name: Deploy to GitHub Pages 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.4
