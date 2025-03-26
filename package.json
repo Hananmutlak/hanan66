@@ -2,13 +2,13 @@
   "name": "sjukdom10",
   "version": "1.0.0",
   "scripts": {
-    "start": "parcel src/index.html",
-    "build": "parcel build src/index.html --no-scope-hoist",
-    "docs": "jsdoc src/js -d docs",
-    "clean-docs": "rimraf docs",
-    "generate-docs": "npm run clean-docs && npm run docs",
-    "deploy": "npm run build && gh-pages -d dist"
-  },
+  "start": "parcel src/index.html",
+  "build": "parcel build src/index.html --public-url ./",
+  "docs": "jsdoc src/js -d docs",
+  "clean-docs": "rm -rf docs",
+  "generate-docs": "npm run clean-docs && npm run docs",
+  "deploy": "npm run build && gh-pages -d dist"
+},
   "dependencies": {
     "chart.js": "^4.0.0",
     "leaflet": "^1.9.4"
@@ -22,7 +22,8 @@
     "jsdoc": "^4.0.4",
     "parcel": "^2.14.2",
     "rimraf": "^6.0.1",
-    "sass": "^1.72.0"
+    "sass": "^1.72.0",
+    "svgo": "^3.0.2"
   },
   "browserslist": [
     ">0.2%",
