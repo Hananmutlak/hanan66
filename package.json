@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "parcel src/index.html",
-    "build": "parcel build src/*.html --public-url ./ --no-scope-hoist",
+   "build": "parcel build src/*.html --public-url ./ --no-scope-hoist --no-source-maps",
     "docs": "jsdoc src/js -d docs",
     "deploy": "npm run build && gh-pages -d dist"
   },

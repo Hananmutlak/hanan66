@@ -49,7 +49,7 @@ async function fetchNewsForCountry(country) {
     try {
         const apiKey = '8cf220f2e3f548b78aa38afc2f12b039';
         const query = `(disease OR pandemic OR outbreak OR virus OR infection) AND ${country}`;
-        const url = `http://newsapi.org/v2/everything?q=${encodeURIComponent(query) }&language=en&sortBy=publishedAt&apiKey=${apiKey}`;
+        const url = `https://newsapi.org/v2/top-headlines?category=health&language=en&apiKey=${apiKey}`;
         
         const response = await fetch(url);
         

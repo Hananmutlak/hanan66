@@ -1,4 +1,4 @@
-9329
+9335
 43C:\Users\hanan\Desktop\projecthanan\netlify133879282251561039 1
 85C:\Users\hanan\Desktop\projecthanan\node_modules\mdn-data\api\inheritance.schema.json133879305894259398 0
 84C:\Users\hanan\Desktop\projecthanan\node_modules\markdown-it\lib\presets\default.mjs133879305898939366 0
@@ -70,7 +70,7 @@
 77C:\Users\hanan\Desktop\projecthanan\node_modules\@parcel\events\src\errors.js133879305889339398 0
 72C:\Users\hanan\Desktop\projecthanan\node_modules\fastq\.github\workflows133879305894229418 1
 81C:\Users\hanan\Desktop\projecthanan\node_modules\underscore\modules\isFunction.js133879305919369402 0
-40C:\Users\hanan\Desktop\projecthanan\dist133879306031527430 1
+40C:\Users\hanan\Desktop\projecthanan\dist133879317900555354 1
 40C:\Users\hanan\Desktop\projecthanan\docs133879307354876751 1
 82C:\Users\hanan\Desktop\projecthanan\node_modules\caniuse-lite\data\features\sni.js133879305931289365 0
 91C:\Users\hanan\Desktop\projecthanan\node_modules\type-fest\source\require-at-least-one.d.ts133879305901079424 0
@@ -109,7 +109,7 @@
 73C:\Users\hanan\Desktop\projecthanan\node_modules\underscore\amd\sortBy.js133879305923639377 0
 125C:\Users\hanan\Desktop\projecthanan\node_modules\.cache\gh-pages\https!github.com!Hananmutlak!hanan66.git\virus1.b64aa851.svg133879306147196086 0
 79C:\Users\hanan\Desktop\projecthanan\node_modules\nth-check\lib\esm\index.js.map133879305894959389 0
-48C:\Users\hanan\Desktop\projecthanan\package.json133879305029438771 0
+48C:\Users\hanan\Desktop\projecthanan\package.json133879317771900323 0
 92C:\Users\hanan\Desktop\projecthanan\node_modules\posthtml\node_modules\entities\package.json133879305893499426 0
 77C:\Users\hanan\Desktop\projecthanan\node_modules\@parcel\types\lib\index.d.ts133879305886949424 0
 65C:\Users\hanan\Desktop\projecthanan\node_modules\lodash\fp\any.js133879305920619363 0
@@ -148,7 +148,7 @@
 126C:\Users\hanan\Desktop\projecthanan\node_modules\posthtml\node_modules\dom-serializer\node_modules\entities\lib\index.d.ts.map133879305894319465 0
 68C:\Users\hanan\Desktop\projecthanan\node_modules\dotenv\CHANGELOG.md133879305889819414 0
 62C:\Users\hanan\Desktop\projecthanan\node_modules\chart.js\dist133879305916779368 1
-50C:\Users\hanan\Desktop\projecthanan\src\js\news.js133878966493083358 0
+50C:\Users\hanan\Desktop\projecthanan\src\js\news.js133879316314660518 0
 67C:\Users\hanan\Desktop\projecthanan\node_modules\markdown-it-anchor133879305893959423 1
 87C:\Users\hanan\Desktop\projecthanan\node_modules\caniuse-lite\data\features\testfeat.js133879305932359397 0
 65C:\Users\hanan\Desktop\projecthanan\node_modules\braces\README.md133879305892039350 0
@@ -547,7 +547,7 @@
 69C:\Users\hanan\Desktop\projecthanan\node_modules\universalify\LICENSE133879305882269339 0
 75C:\Users\hanan\Desktop\projecthanan\node_modules\underscore\amd\iteratee.js133879305920539390 0
 96C:\Users\hanan\Desktop\projecthanan\node_modules\@swc\helpers\esm\_ts_add_disposable_resource.js133879305916929385 0
-60C:\Users\hanan\Desktop\projecthanan\dist\layers.760a0456.png133879306019082505 0
+60C:\Users\hanan\Desktop\projecthanan\dist\layers.760a0456.png133879317886338308 0
 75C:\Users\hanan\Desktop\projecthanan\node_modules\underscore\amd\isNumber.js133879305919709439 0
 82C:\Users\hanan\Desktop\projecthanan\node_modules\htmlnano\lib\modules\minifyJs.cjs133879305896649443 0
 81C:\Users\hanan\Desktop\projecthanan\node_modules\underscore\modules\_tagTester.js133879305910439375 0
@@ -1242,14 +1242,14 @@
 82C:\Users\hanan\Desktop\projecthanan\node_modules\xmlcreate\lib\nodes\XmlCharRef.js133879305892779474 0
 73C:\Users\hanan\Desktop\projecthanan\node_modules\underscore\cjs\reject.js133879305922889428 0
 76C:\Users\hanan\Desktop\projecthanan\node_modules\punycode.js\punycode.es6.js133879305882339433 0
-50C:\Users\hanan\Desktop\projecthanan\dist\news.html133879306031098881 0
+50C:\Users\hanan\Desktop\projecthanan\dist\news.html133879317899815249 0
 80C:\Users\hanan\Desktop\projecthanan\node_modules\@parcel\package-manager\LICENSE133879305882689369 0
 72C:\Users\hanan\Desktop\projecthanan\node_modules\underscore\package.json133879305926269399 0
 75C:\Users\hanan\Desktop\projecthanan\node_modules\lodash\_trimmedEndIndex.js133879305920149414 0
 77C:\Users\hanan\Desktop\projecthanan\node_modules\chrome-trace-event\README.md133879305886649359 0
 113C:\Users\hanan\Desktop\projecthanan\node_modules\@parcel\transformer-postcss\node_modules\semver\functions\neq.js133879305900619380 0
 67C:\Users\hanan\Desktop\projecthanan\node_modules\requizzle\index.js133879305885539387 0
-60C:\Users\hanan\Desktop\projecthanan\dist\virus1.b64aa851.svg133879306030368934 0
+60C:\Users\hanan\Desktop\projecthanan\dist\virus1.b64aa851.svg133879317899299721 0
 75C:\Users\hanan\Desktop\projecthanan\node_modules\lodash\_listCacheDelete.js133879305918549467 0
 82C:\Users\hanan\Desktop\projecthanan\node_modules\xmlcreate\lib\nodes\XmlComment.js133879305893409352 0
 101C:\Users\hanan\Desktop\projecthanan\node_modules\@swc\helpers\esm\_object_without_properties_loose.js133879305916199440 0
@@ -2852,7 +2852,7 @@
 71C:\Users\hanan\Desktop\projecthanan\node_modules\find-cache-dir\license133879305882489414 0
 69C:\Users\hanan\Desktop\projecthanan\node_modules\lodash\stubObject.js133879305933859466 0
 70C:\Users\hanan\Desktop\projecthanan\node_modules\sass\sass.default.cjs133879305885309379 0
-67C:\Users\hanan\Desktop\projecthanan\docs\module-MapIntegration.html133879307354836693 0
+67C:\Users\hanan\Desktop\projecthanan\docs\module-MapIntegration.html133879307643343000 0
 70C:\Users\hanan\Desktop\projecthanan\node_modules\lodash\_getMapData.js133879305917089439 0
 61C:\Users\hanan\Desktop\projecthanan\node_modules\sass\sass.js133879305909239562 0
 79C:\Users\hanan\Desktop\projecthanan\node_modules\@parcel\core\lib\loadDotEnv.js133879305910849370 0
@@ -3005,7 +3005,7 @@
 70C:\Users\hanan\Desktop\projecthanan\node_modules\bluebird\package.json133879305882569328 0
 68C:\Users\hanan\Desktop\projecthanan\node_modules\lodash\_overRest.js133879305919179453 0
 79C:\Users\hanan\Desktop\projecthanan\node_modules\chart.js\dist\types\index.d.ts133879305915819346 0
-51C:\Users\hanan\Desktop\projecthanan\docs\index.html133879307354746689 0
+51C:\Users\hanan\Desktop\projecthanan\docs\index.html133879307643222956 0
 73C:\Users\hanan\Desktop\projecthanan\node_modules\queue-microtask\index.js133879305883459474 0
 69C:\Users\hanan\Desktop\projecthanan\node_modules\@babel\types\LICENSE133879305882749336 0
 69C:\Users\hanan\Desktop\projecthanan\node_modules\lodash\fp\inRange.js133879305927459366 0
@@ -3073,7 +3073,7 @@
 87C:\Users\hanan\Desktop\projecthanan\node_modules\@parcel\transformer-sass\src\modern.js133879305888439408 0
 66C:\Users\hanan\Desktop\projecthanan\node_modules\mdn-data\index.js133879305886879380 0
 91C:\Users\hanan\Desktop\projecthanan\node_modules\csso\node_modules\css-tree\cjs\syntax\node133879305913869453 1
-63C:\Users\hanan\Desktop\projecthanan\dist\wash-hand.16f6a465.jpg133879306020890072 0
+63C:\Users\hanan\Desktop\projecthanan\dist\wash-hand.16f6a465.jpg133879317889195548 0
 85C:\Users\hanan\Desktop\projecthanan\node_modules\@swc\helpers\esm\_async_generator.js133879305912179358 0
 89C:\Users\hanan\Desktop\projecthanan\node_modules\@babel\types\lib\builders\productions.js133879305901639384 0
 94C:\Users\hanan\Desktop\projecthanan\node_modules\posthtml\node_modules\posthtml-parser\license133879305882769363 0
@@ -3786,7 +3786,7 @@
 68C:\Users\hanan\Desktop\projecthanan\node_modules\markdown-it\LICENSE133879305882409336 0
 72C:\Users\hanan\Desktop\projecthanan\node_modules\markdown-it\lib\helpers133879305905829388 1
 75C:\Users\hanan\Desktop\projecthanan\node_modules\css-tree\lib\utils\List.js133879305918269483 0
-43C:\Users\hanan\Desktop\projecthanan\dist\js133879306021164595 1
+43C:\Users\hanan\Desktop\projecthanan\dist\js133879317889408267 1
 65C:\Users\hanan\Desktop\projecthanan\node_modules\lodash\repeat.js133879305932399362 0
 70C:\Users\hanan\Desktop\projecthanan\node_modules\lodash\fp\isNumber.js133879305928569483 0
 81C:\Users\hanan\Desktop\projecthanan\node_modules\markdown-it\lib\parser_block.mjs133879305906039369 0
@@ -3823,6 +3823,7 @@
 69C:\Users\hanan\Desktop\projecthanan\node_modules\lodash\difference.js133879305923749429 0
 84C:\Users\hanan\Desktop\projecthanan\node_modules\@swc\helpers\_\_array_like_to_array133879305917849458 1
 87C:\Users\hanan\Desktop\projecthanan\node_modules\markdown-it\lib\rules_core\linkify.mjs133879305904259392 0
+61C:\Users\hanan\Desktop\projecthanan\dist\contact.7c57199b.css133879317899820895 0
 92C:\Users\hanan\Desktop\projecthanan\node_modules\markdown-it\lib\rules_core\replacements.mjs133879305906679367 0
 102C:\Users\hanan\Desktop\projecthanan\node_modules\caniuse-lite\data\features\css-repeating-gradients.js133879305918689382 0
 75C:\Users\hanan\Desktop\projecthanan\node_modules\htmlnano\docs\netlify.toml133879305912149438 0
@@ -6554,7 +6555,7 @@
 71C:\Users\hanan\Desktop\projecthanan\node_modules\css-tree\dist\data.cjs133879305901699428 0
 70C:\Users\hanan\Desktop\projecthanan\node_modules\css-tree\dist\data.js133879305916639370 0
 96C:\Users\hanan\Desktop\projecthanan\node_modules\@parcel\transformer-html\src\HTMLTransformer.js133879305888449346 0
-72C:\Users\hanan\Desktop\projecthanan\dist\kids-wearing-masks.69f63ad2.jpg133879306023427142 0
+72C:\Users\hanan\Desktop\projecthanan\dist\kids-wearing-masks.69f63ad2.jpg133879317892034798 0
 73C:\Users\hanan\Desktop\projecthanan\node_modules\css-tree\dist\version.js133879305920019444 0
 70C:\Users\hanan\Desktop\projecthanan\node_modules\css-tree\cjs\data.cjs133879305901159356 0
 79C:\Users\hanan\Desktop\projecthanan\node_modules\css-tree\cjs\definition-syntax133879305914319384 1
@@ -7131,7 +7132,7 @@
 76C:\Users\hanan\Desktop\projecthanan\node_modules\.bin\update-browserslist-db133879305943919377 0
 80C:\Users\hanan\Desktop\projecthanan\node_modules\caniuse-lite\data\regions\WS.js133879305934859456 0
 80C:\Users\hanan\Desktop\projecthanan\node_modules\caniuse-lite\data\regions\YE.js133879305934989447 0
-65C:\Users\hanan\Desktop\projecthanan\dist\marker-icon.3f7d3721.png133879306023421317 0
+65C:\Users\hanan\Desktop\projecthanan\dist\marker-icon.3f7d3721.png133879317892022773 0
 80C:\Users\hanan\Desktop\projecthanan\node_modules\caniuse-lite\data\regions\ZM.js133879305935049484 0
 80C:\Users\hanan\Desktop\projecthanan\node_modules\caniuse-lite\data\regions\ZW.js133879305935099395 0
 82C:\Users\hanan\Desktop\projecthanan\node_modules\caniuse-lite\data\features\aac.js133879305884679403 0
@@ -7373,7 +7374,7 @@
 61C:\Users\hanan\Desktop\projecthanan\node_modules\.bin\js-yaml133879305943879345 0
 94C:\Users\hanan\Desktop\projecthanan\node_modules\caniuse-lite\data\features\input-selection.js133879305926099474 0
 94C:\Users\hanan\Desktop\projecthanan\node_modules\caniuse-lite\data\features\insert-adjacent.js133879305926129408 0
-51C:\Users\hanan\Desktop\projecthanan\dist\index.html133879306031098881 0
+51C:\Users\hanan\Desktop\projecthanan\dist\index.html133879317899815249 0
 78C:\Users\hanan\Desktop\projecthanan\node_modules\@kurkle\color\dist\color.d.ts133879305891309375 0
 85C:\Users\hanan\Desktop\projecthanan\node_modules\caniuse-lite\data\features\jpegxr.js133879305926599373 0
 99C:\Users\hanan\Desktop\projecthanan\node_modules\caniuse-lite\data\features\js-regexp-lookbehind.js133879305926629368 0
@@ -7797,7 +7798,7 @@
 76C:\Users\hanan\Desktop\projecthanan\node_modules\@swc\helpers\_\_ts_metadata133879305922149370 1
 74C:\Users\hanan\Desktop\projecthanan\node_modules\@swc\helpers\_\_ts_values133879305922239424 1
 71C:\Users\hanan\Desktop\projecthanan\node_modules\@swc\helpers\_\_update133879305922389431 1
-56C:\Users\hanan\Desktop\projecthanan\dist\statistics.html133879306031138213 0
+56C:\Users\hanan\Desktop\projecthanan\dist\statistics.html133879317899815249 0
 74C:\Users\hanan\Desktop\projecthanan\node_modules\@swc\helpers\_\_using_ctx133879305922439455 1
 105C:\Users\hanan\Desktop\projecthanan\node_modules\@swc\helpers\_\_check_private_redeclaration\package.json133879305918499366 0
 98C:\Users\hanan\Desktop\projecthanan\node_modules\@swc\helpers\_\_wrap_async_generator\package.json133879305922549376 0
@@ -7948,7 +7949,7 @@
 98C:\Users\hanan\Desktop\projecthanan\node_modules\@swc\helpers\esm\_define_enumerable_properties.js133879305914749364 0
 85C:\Users\hanan\Desktop\projecthanan\node_modules\@swc\helpers\esm\_define_property.js133879305914809463 0
 81C:\Users\hanan\Desktop\projecthanan\node_modules\@swc\helpers\esm\_export_star.js133879305914919399 0
-64C:\Users\hanan\Desktop\projecthanan\dist\wash-hand.7947f9d1.avif133879306019082505 0
+64C:\Users\hanan\Desktop\projecthanan\dist\wash-hand.7947f9d1.avif133879317886348298 0
 86C:\Users\hanan\Desktop\projecthanan\node_modules\@swc\helpers\esm\_get_prototype_of.js133879305915029367 0
 84C:\Users\hanan\Desktop\projecthanan\node_modules\@swc\helpers\esm\_inherits_loose.js133879305915189369 0
 93C:\Users\hanan\Desktop\projecthanan\node_modules\@swc\helpers\esm\_interop_require_default.js133879305915479360 0
@@ -8199,6 +8200,7 @@
 76C:\Users\hanan\Desktop\projecthanan\node_modules\@parcel\utils\src\schema.js133879305908629401 0
 83C:\Users\hanan\Desktop\projecthanan\node_modules\@parcel\utils\src\shared-buffer.js133879305908749377 0
 78C:\Users\hanan\Desktop\projecthanan\node_modules\@parcel\utils\src\throttle.js133879305909559376 0
+57C:\Users\hanan\Desktop\projecthanan\dist\news.b206f550.js133879317892297053 0
 75C:\Users\hanan\Desktop\projecthanan\node_modules\@parcel\utils\lib\index.js133879305905609391 0
 79C:\Users\hanan\Desktop\projecthanan\node_modules\@parcel\utils\lib\index.js.map133879305912799441 0
 79C:\Users\hanan\Desktop\projecthanan\node_modules\@parcel\types-internal\LICENSE133879305882619423 0
@@ -8217,7 +8219,7 @@
 83C:\Users\hanan\Desktop\projecthanan\node_modules\@parcel\packager-js\lib\helpers.js133879305893119385 0
 112C:\Users\hanan\Desktop\projecthanan\node_modules\@parcel\node-resolver-core\node_modules\semver\classes\range.js133879305902469419 0
 86C:\Users\hanan\Desktop\projecthanan\node_modules\@parcel\types-internal\lib\Cache.d.ts133879305895899365 0
-52C:\Users\hanan\Desktop\projecthanan\docs\map.js.html133879307354726720 0
+52C:\Users\hanan\Desktop\projecthanan\docs\map.js.html133879307643203035 0
 100C:\Users\hanan\Desktop\projecthanan\node_modules\@parcel\types-internal\lib\DependencySpecifier.d.ts133879305896539418 0
 103C:\Users\hanan\Desktop\projecthanan\node_modules\@parcel\types-internal\lib\FileCreateInvalidation.d.ts133879305896909384 0
 87C:\Users\hanan\Desktop\projecthanan\node_modules\@parcel\types-internal\lib\unsafe.d.ts133879305899749500 0
@@ -8517,7 +8519,7 @@
 93C:\Users\hanan\Desktop\projecthanan\node_modules\@parcel\reporter-dev-server\src\HMRServer.js133879305888449346 0
 90C:\Users\hanan\Desktop\projecthanan\node_modules\@parcel\reporter-dev-server\src\Server.js133879305890379382 0
 96C:\Users\hanan\Desktop\projecthanan\node_modules\@parcel\reporter-dev-server\src\serverErrors.js133879305891039390 0
-63C:\Users\hanan\Desktop\projecthanan\docs\module-NewsModule.html133879307354876751 0
+63C:\Users\hanan\Desktop\projecthanan\docs\module-NewsModule.html133879307643383001 0
 99C:\Users\hanan\Desktop\projecthanan\node_modules\@parcel\reporter-dev-server\src\templates\404.html133879305885689370 0
 82C:\Users\hanan\Desktop\projecthanan\node_modules\@parcel\reporter-cli\package.json133879305895039371 0
 94C:\Users\hanan\Desktop\projecthanan\node_modules\@parcel\reporter-cli\test\CLIReporter.test.js133879305891909384 0
@@ -8764,7 +8766,7 @@
 97C:\Users\hanan\Desktop\projecthanan\node_modules\@parcel\core\test\requests\DevDepRequest.test.js133879305908109388 0
 95C:\Users\hanan\Desktop\projecthanan\node_modules\@parcel\core\test\fixtures\application-targets133879305917459371 1
 90C:\Users\hanan\Desktop\projecthanan\node_modules\@parcel\core\test\fixtures\common-targets133879305917549364 1
-73C:\Users\hanan\Desktop\projecthanan\dist\kids-wearing-masks.888ed610.webp133879306019082505 0
+73C:\Users\hanan\Desktop\projecthanan\dist\kids-wearing-masks.888ed610.webp133879317886358385 0
 97C:\Users\hanan\Desktop\projecthanan\node_modules\@parcel\core\test\fixtures\common-targets-ignore133879305917499363 1
 82C:\Users\hanan\Desktop\projecthanan\node_modules\@parcel\core\test\fixtures\config133879305892629369 1
 99C:\Users\hanan\Desktop\projecthanan\node_modules\@parcel\core\test\fixtures\config-plugin-not-found133879305890379382 1
@@ -9291,9 +9293,9 @@
 80C:\Users\hanan\Desktop\projecthanan\node_modules\.bin\update-browserslist-db.ps1133879305943909354 0
 53C:\Users\hanan\Desktop\projecthanan\netlify\functions133879282251610849 1
 66C:\Users\hanan\Desktop\projecthanan\netlify\functions\fetchNews.js133878971417124462 0
-55C:\Users\hanan\Desktop\projecthanan\docs\charts.js.html133879307354706738 0
-64C:\Users\hanan\Desktop\projecthanan\docs\module-ChartModule.html133879307354796705 0
-53C:\Users\hanan\Desktop\projecthanan\docs\news.js.html133879307354686707 0
+55C:\Users\hanan\Desktop\projecthanan\docs\charts.js.html133879307643182988 0
+64C:\Users\hanan\Desktop\projecthanan\docs\module-ChartModule.html133879307643302998 0
+53C:\Users\hanan\Desktop\projecthanan\docs\news.js.html133879307643172998 0
 47C:\Users\hanan\Desktop\projecthanan\docs\styles133879307354526654 1
 65C:\Users\hanan\Desktop\projecthanan\docs\styles\jsdoc-default.css133879305913899420 0
 62C:\Users\hanan\Desktop\projecthanan\docs\scripts\linenumber.js133879305913489379 0
@@ -9310,21 +9312,25 @@
 79C:\Users\hanan\Desktop\projecthanan\docs\fonts\OpenSans-LightItalic-webfont.eot133879305912559397 0
 80C:\Users\hanan\Desktop\projecthanan\docs\fonts\OpenSans-LightItalic-webfont.woff133879305912919417 0
 65C:\Users\hanan\Desktop\projecthanan\dist\contact.36eb20e3.css.map133879306031474197 0
+61C:\Users\hanan\Desktop\projecthanan\dist\contact.544246b8.css133879317899832651 0
 61C:\Users\hanan\Desktop\projecthanan\dist\contact.586d1a51.css133879306031138213 0
+61C:\Users\hanan\Desktop\projecthanan\dist\contact.ba574381.css133879317899826771 0
+60C:\Users\hanan\Desktop\projecthanan\dist\contact.e8adf2ad.js133879317893495563 0
 60C:\Users\hanan\Desktop\projecthanan\dist\contact.fc466a49.js133879306031149571 0
-53C:\Users\hanan\Desktop\projecthanan\dist\contact.html133879306031098881 0
-73C:\Users\hanan\Desktop\projecthanan\dist\kids-wearing-masks.d9d0485c.avif133879306020816498 0
-63C:\Users\hanan\Desktop\projecthanan\dist\layers-2x.b7b89169.png133879306020890072 0
-49C:\Users\hanan\Desktop\projecthanan\dist\map.html133879306031098881 0
+53C:\Users\hanan\Desktop\projecthanan\dist\contact.html133879317899798565 0
+73C:\Users\hanan\Desktop\projecthanan\dist\kids-wearing-masks.d9d0485c.avif133879317889087703 0
+63C:\Users\hanan\Desktop\projecthanan\dist\layers-2x.b7b89169.png133879317889183465 0
+49C:\Users\hanan\Desktop\projecthanan\dist\map.html133879317899815249 0
 61C:\Users\hanan\Desktop\projecthanan\dist\news.b3ab05ed.js.map133879306031474197 0
-56C:\Users\hanan\Desktop\projecthanan\dist\prevention.html133879306031104551 0
+56C:\Users\hanan\Desktop\projecthanan\dist\prevention.html133879317899815249 0
 66C:\Users\hanan\Desktop\projecthanan\dist\projecthanan.33eeae7d.css133879306031149571 0
 70C:\Users\hanan\Desktop\projecthanan\dist\projecthanan.33eeae7d.css.map133879306031474197 0
-60C:\Users\hanan\Desktop\projecthanan\dist\virus1.741011f9.png133879306020890072 0
-64C:\Users\hanan\Desktop\projecthanan\dist\wash-hand.bf6b1a37.webp133879306018552495 0
-64C:\Users\hanan\Desktop\projecthanan\dist\wear-mask.b27abef5.avif133879306018612506 0
-64C:\Users\hanan\Desktop\projecthanan\dist\wear-mask.f15c6c05.webp133879306023363233 0
-49C:\Users\hanan\Desktop\projecthanan\dist\js\sw.js133879306021118880 0
+66C:\Users\hanan\Desktop\projecthanan\dist\projecthanan.56bd2307.css133879317886168374 0
+60C:\Users\hanan\Desktop\projecthanan\dist\virus1.741011f9.png133879317889195548 0
+64C:\Users\hanan\Desktop\projecthanan\dist\wash-hand.bf6b1a37.webp133879317886038325 0
+64C:\Users\hanan\Desktop\projecthanan\dist\wear-mask.b27abef5.avif133879317886178342 0
+64C:\Users\hanan\Desktop\projecthanan\dist\wear-mask.f15c6c05.webp133879317892064475 0
+49C:\Users\hanan\Desktop\projecthanan\dist\js\sw.js133879317889390770 0
 53C:\Users\hanan\Desktop\projecthanan\dist\js\sw.js.map133879306021153120 0
 53C:\Users\hanan\Desktop\projecthanan\.github\workflows133879282245920871 1
-64C:\Users\hanan\Desktop\projecthanan\.github\workflows\deploy.yml133875554309617476 0
+64C:\Users\hanan\Desktop\projecthanan\.github\workflows\deploy.yml133879311187297698 0
