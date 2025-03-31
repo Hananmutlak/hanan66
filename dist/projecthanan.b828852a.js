@@ -752,6 +752,6 @@ if ('serviceWorker' in navigator) window.addEventListener('load', ()=>{
 },{"./map.js":"3xMZD","./charts.js":"WUUf9","./news.js":"hlJHp","3e4a993a1cf4f24b":"i5bin"}],"i5bin":[function(require,module,exports,__globalThis) {
 module.exports = module.bundle.resolve("js\\sw.js");
 
-},{}]},["93v64","lhpGb"], "lhpGb", "parcelRequire1875", {}, "./", "/")
+},{}]},["93v64","lhpGb"], "lhpGb", "parcelRequire9a6f", {}, "./", "/")
 
 //# sourceMappingURL=projecthanan.b828852a.js.map

@@ -767,6 +767,6 @@ window.updateNewsForCountry = (country)=>{
     fetchNewsForCountry(country);
 };
 
-},{}]},["c73Dv","hlJHp"], "hlJHp", "parcelRequire1875", {})
+},{}]},["c73Dv","hlJHp"], "hlJHp", "parcelRequire9a6f", {})
 
 //# sourceMappingURL=news.6a63a89d.js.map

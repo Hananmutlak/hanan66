@@ -318,21 +318,21 @@ body.contact-page .floating-germs .germ:hover {
 }
 
 body.contact-page .floating-germs .germ:first-child {
-  animation-duration: 9s;
-  top: 22%;
-  left: 14%;
+  animation-duration: 11s;
+  top: 90%;
+  left: 62%;
 }
 
 body.contact-page .floating-germs .germ:nth-child(2) {
   animation-duration: 8s;
-  top: 2%;
-  left: 57%;
+  top: 38%;
+  left: 33%;
 }
 
 body.contact-page .floating-germs .germ:nth-child(3) {
-  animation-duration: 11s;
-  top: 10%;
-  left: 17%;
+  animation-duration: 15s;
+  top: 26%;
+  left: 72%;
 }
 
 @keyframes germFloat {
