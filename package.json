@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "parcel src/index.html",
-"build": "parcel build src/index.html --dist-dir dist --public-url / --no-scope-hoist",
+    "build": "parcel build src/*.html --public-url ./ --no-scope-hoist",
     "optimize-images": "imagemin src/assets/images/*.{png,jpg,jpeg,svg} --out-dir=dist/assets/images --plugin=mozjpeg --plugin=pngquant --plugin=svgo",
     "convert-webp": "imagemin src/assets/images/*.{png,jpg,jpeg} --out-dir=dist/assets/images --plugin=webp",
     "minify-css": "cleancss -o dist/css/main.min.css src/css/main.css",
@@ -11,7 +11,7 @@
     "docs": "jsdoc src/js -d docs",
     "clean-docs": "rimraf docs",
     "generate-docs": "npm run clean-docs && npm run docs",
-    "deploy": "npm run build && gh-pages -d dist"
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "chart.js": "^4.0.0",
