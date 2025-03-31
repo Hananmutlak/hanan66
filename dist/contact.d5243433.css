@@ -214,8 +214,8 @@
 }
 
 body.contact-page {
-  color: #333;
-  background-color: #ddd;
+  color: #222;
+  background-color: #fff;
   margin: 0;
   padding: 0;
   font-family: Roboto, sans-serif;
@@ -255,14 +255,14 @@ body.contact-page #contact #contactForm input, body.contact-page #contact #conta
 }
 
 body.contact-page #contact #contactForm input:focus, body.contact-page #contact #contactForm textarea:focus {
-  border-color: #1e3e62;
+  border-color: #0056b3;
   outline: none;
 }
 
 body.contact-page #contact #contactForm button {
   color: #fff;
   cursor: pointer;
-  background: #1e3e62;
+  background: #0056b3;
   border: none;
   border-radius: .5rem;
   padding: .8rem 2rem;
@@ -270,7 +270,7 @@ body.contact-page #contact #contactForm button {
 }
 
 body.contact-page #contact #contactForm button:hover {
-  background: #12253b;
+  background: #003d80;
 }
 
 body.contact-page .vaccine-animation {
@@ -318,21 +318,21 @@ body.contact-page .floating-germs .germ:hover {
 }
 
 body.contact-page .floating-germs .germ:first-child {
-  animation-duration: 6s;
-  top: 84%;
-  left: 82%;
+  animation-duration: 7s;
+  top: 83%;
+  left: 87%;
 }
 
 body.contact-page .floating-germs .germ:nth-child(2) {
-  animation-duration: 7s;
-  top: 64%;
-  left: 86%;
+  animation-duration: 15s;
+  top: 19%;
+  left: 20%;
 }
 
 body.contact-page .floating-germs .germ:nth-child(3) {
-  animation-duration: 15s;
-  top: 15%;
-  left: 6%;
+  animation-duration: 13s;
+  top: 74%;
+  left: 54%;
 }
 
 @keyframes germFloat {
@@ -352,7 +352,7 @@ body.contact-page .floating-germs .germ:nth-child(3) {
 body.contact-page footer {
   color: #fff;
   text-align: center;
-  background-color: #1e3e62;
+  background-color: #0056b3;
   margin-top: 2rem;
   padding: 1rem;
 }

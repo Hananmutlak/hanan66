@@ -2,6 +2,7 @@ import { initMap, getSelectedCountry } from './map.js';
 import { renderCharts } from './charts.js';
 import { fetchNewsForCountry } from './news.js';
 
+
 document.addEventListener('DOMContentLoaded', () => {
     // إدارة القائمة على جميع الصفحات
     const menuIcon = document.querySelector('.menu-icon');
@@ -86,3 +87,15 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (currentPage === 'statistics.html') renderCharts();
 });
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register(new URL('./sw.js', import.meta.url))
+        .then(registration => {
+          console.log('Service Worker registered with scope:', registration.scope);
+        })
+        .catch(error => {
+          console.error('Service Worker registration failed:', error);
+        });
+    });
+  }
+  

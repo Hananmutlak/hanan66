@@ -3,72 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- إضافة وصف SEO محسن -->
+    <meta name="description" content="Contact Global Disease Tracker team for inquiries, feedback or collaboration opportunities about disease tracking and prevention">
+    <!-- إضافة تاج robots -->
+    <meta name="robots" content="index, follow">
     <title>Contact Us - Global Disease Tracker</title>
     <link rel="stylesheet" href="./scss/contact.scss">
     <link rel="stylesheet" href="./scss/main.scss">
     <link rel="icon" type="image/x-icon" href="./assets/images/virus1.svg">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- تحسين Font Awesome مع SRI -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+          integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer">
 </head>
-<body class="contact-page"> <!-- إضافة فئة خاصة بصفحة التواصل -->
+<body class="contact-page">
     <header>
-      
-            <nav>
-                <div class="logo">
-                    <a href="index.html">
-                <img src="./assets/images/virus1.png" alt="Global Disease Tracker Logo" class="logo">
-                <nav>
+        <nav aria-label="Main Navigation">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="./assets/images/virus1.png" 
+                         alt="Global Disease Tracker Logo" 
+                         class="logo"
+                         width="120"
+                         height="40">
+                </a>
             </div>
-                <div class="menu-icon">&#9776;</div>
-               
-    
-            <div class="nav-links">
-                <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
-                <a href="statistics.html" class="nav-link"><i class="fas fa-chart-line"></i> Statistics</a>
-                <a href="map.html" class="nav-link"><i class="fas fa-map"></i> Map</a>
-                <a href="prevention.html" class="nav-link"><i class="fas fa-shield-alt"></i> Prevention</a>
-                <a href="contact.html" class="nav-link"><i class="fas fa-envelope"></i> Contact</a>
-                <a href="news.html" class="nav-link active"><i class="fas fa-newspaper"></i> News</a>
+            <button class="menu-icon" 
+                    aria-label="Toggle Menu"
+                    aria-expanded="false"
+                    aria-controls="nav-links">&#9776;</button>
+            <div class="nav-links" id="nav-links" role="navigation">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home" aria-hidden="true"></i>
+                    <span>Home</span>
+                </a>
+                <a href="statistics.html" class="nav-link">
+                    <i class="fas fa-chart-line" aria-hidden="true"></i>
+                    <span>Statistics</span>
+                </a>
+                <a href="map.html" class="nav-link">
+                    <i class="fas fa-map" aria-hidden="true"></i>
+                    <span>Map</span>
+                </a>
+                <a href="prevention.html" class="nav-link">
+                    <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                    <span>Prevention</span>
+                </a>
+                <a href="contact.html" class="nav-link active" aria-current="page">
+                    <i class="fas fa-envelope" aria-hidden="true"></i>
+                    <span>Contact</span>
+                </a>
+                <a href="news.html" class="nav-link">
+                    <i class="fas fa-newspaper" aria-hidden="true"></i>
+                    <span>News</span>
+                </a>
             </div>
         </nav>
     </header>
 
     <main>
-        <!-- صفحة التواصل -->
-        <section id="contact">
-            <h2>Contact Us</h2>
+        <section id="contact" aria-labelledby="contact-heading">
+            <h2 id="contact-heading">Contact Us</h2>
             <form id="contactForm">
-                <input type="text" placeholder="Your Name" required>
-                <input type="email" placeholder="Email Address" required>
-                <textarea placeholder="Your Message" required></textarea>
-                <button type="submit">Send Message</button>
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="Email Address" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Your Message</label>
+                    <textarea id="message" placeholder="Your Message" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Message</button>
             </form>
-            <!-- أنيميشن إبرة اللقاح -->
-            <div class="vaccine-animation">
-                <img src="./assets/images/virus1.png" alt="Vaccine Animation">
+            
+            <div class="vaccine-animation" aria-hidden="true">
+                <img src="./assets/images/virus1.png" alt="">
             </div>
         </section>
     </main>
 
-  
     <footer>
         <div class="footer-content">
             <p>© 2025 Global Disease Tracker. All rights reserved.</p>
             <div class="social-links">
-                <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
-                <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://facebook.com" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   aria-label="Facebook (opens in new tab)">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://instagram.com" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   aria-label="Instagram (opens in new tab)">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://twitter.com" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   aria-label="Twitter (opens in new tab)">
+                    <i class="fab fa-twitter"></i>
+                </a>
             </div>
         </div>
     </footer>
 
-    <!-- جراثيم طافية -->
-    <div class="floating-germs">
+    <div class="floating-germs" aria-hidden="true">
         <div class="germ">🦠</div>
         <div class="germ">🦠</div>
         <div class="germ">🦠</div>
     </div>
 
-   
     <script src="./js/main.js" type="module"></script>
-  
 </body>
 </html>

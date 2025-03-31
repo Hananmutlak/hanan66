@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "scripts": {
     "start": "parcel src/index.html",
-    "build": "parcel build src/index.html --public-url ./ --no-scope-hoist",
+    "build": "parcel build src/index.html --dist-dir dist --no-source-maps --public-url ./ --no-scope-hoist",
+    "optimize-images": "imagemin src/assets/images/*.{png,jpg,jpeg,svg} --out-dir=dist/assets/images --plugin=mozjpeg --plugin=pngquant --plugin=svgo",
+    "convert-webp": "imagemin src/assets/images/*.{png,jpg,jpeg} --out-dir=dist/assets/images --plugin=webp",
+    "minify-css": "cleancss -o dist/css/main.min.css src/css/main.css",
+    "minify-js": "terser dist/js/main.js -o dist/js/main.min.js --compress --mangle",
     "docs": "jsdoc src/js -d docs",
     "clean-docs": "rimraf docs",
     "generate-docs": "npm run clean-docs && npm run docs",
@@ -24,7 +28,7 @@
     "jsdoc": "^4.0.4",
     "parcel": "^2.14.2",
     "rimraf": "^6.0.1",
-    "sass": "^1.72.0",
+    "sass": "^1.86.0",
     "svgo": "^3.3.2"
   },
   "browserslist": [

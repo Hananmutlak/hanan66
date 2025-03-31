@@ -255,7 +255,8 @@ footer {
     transition: background 0.3s ease;
 
     &:hover {
-        background: color.adjust(#FF6500, $lightness: -10%);
+        background-color: color.adjust(#FF6500, $lightness: -10%);
+
     }
 }
 
@@ -377,39 +378,91 @@ footer {
     padding: 1rem;
     margin-top: 2rem;
 }
+/* تعديلات على شريط البحث */
+/* تعديلات على شريط البحث */
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* زيادة المسافة بين العناصر */
+    margin-bottom: 20px;
+
+    input[type="text"] {
+        padding: 12px; /* زيادة التباعد الداخلي */
+        font-size: 1.2rem; /* زيادة حجم الخط */
+        border: 2px solid $primary-color;
+        border-radius: 5px;
+        width: 70%; /* جعل الحقل أكبر */
+        min-height: 48px; /* ضمان الحد الأدنى للارتفاع */
+    }
+
+    .search-button {
+        background-color: #0e36ff; /* لون بارز */
+        color: white; /* لون النص أبيض لتحقيق التباين */
+        font-size: 1.2rem; /* زيادة حجم الخط */
+        padding: 12px 24px; /* زيادة التباعد الداخلي */
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        min-width: 120px; /* ضمان عرض كافٍ */
+        min-height: 48px; /* ضمان ارتفاع كافٍ */
+
+        &:hover {
+            background-color: darken(#FF6500, 10%); /* تغميق اللون عند التحويم */
+        }
+    }
+}
+
+/* تحسينات عامة للهاتف */
+@media (max-width: 768px) {
+    .search-container {
+        flex-direction: column; /* ترتيب العناصر عموديًا على الهواتف */
+        input {
+            width: 100%; /* جعل مربع النص يأخذ العرض الكامل */
+            margin-bottom: 10px; /* إضافة مسافة بين مربع النص والزر */
+        }
+    }
+}
+
+/* تعديلات على الخريطة */
 #mapContainer {
     height: 400px; /* الحجم الافتراضي لشاشات الكمبيوتر */
     width: 100%;
     margin-bottom: 20px;
+    border: 2px solid $primary-color; /* إضافة حدود */
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* تحسين الظل */
+
     /* تصغير الحجم على الهواتف */
     @media (max-width: 768px) {
         height: 300px;
     }
-    
     @media (max-width: 480px) {
         height: 250px;
     }
 }
-/* تحسينات عامة للهاتف */
-@media (max-width: 768px) {
-    #map {
-        padding: 10px;
-        
-        h2 {
-            font-size: 1.5rem;
-        }
+.docs-link {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 12px 24px;
+    background: var(--primary-color);
+    color: rgb(239, 218, 218) !important;
+    border-radius: 30px;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    z-index: 1000;
+    transition: all 0.3s ease;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.3);
     }
-    
-    .search-container {
-        flex-direction: column;
-        
-        input {
-            width: 100% !important;
-            margin-right: 0;
-            margin-bottom: 10px;
-        }
+
+    @media (max-width: 768px) {
+        padding: 10px 20px;
+        font-size: 14px;
+        bottom: 15px;
+        right: 15px;
     }
 }
