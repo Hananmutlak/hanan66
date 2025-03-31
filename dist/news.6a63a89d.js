@@ -670,24 +670,17 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 const newsContainer = document.getElementById('newsContainer');
 const newsHeading = document.getElementById('newsHeading');
 let allArticles = [];
-const apiKey = '8cf220f2e3f548b78aa38afc2f12b039'; // استبدل ب API key الخاص بك
-// تهيئة الصفحة
-document.addEventListener('DOMContentLoaded', ()=>{
-    initNewsModule();
-});
+const apiKey = '8cf220f2e3f548b78aa38afc2f12b039'; // استبدل بمفتاحك
+document.addEventListener('DOMContentLoaded', initNewsModule);
 function initNewsModule() {
     const selectedCountry = localStorage.getItem('selectedCountry');
-    if (selectedCountry) {
-        fetchNewsForCountry(selectedCountry);
-        localStorage.removeItem('selectedCountry');
-    } else fetchGeneralNews();
+    selectedCountry ? fetchNewsForCountry(selectedCountry) : fetchGeneralNews();
 }
 async function fetchGeneralNews() {
     try {
         showLoading();
         const url = `https://newsapi.org/v2/top-headlines?category=health&language=en&pageSize=30&apiKey=${apiKey}`;
         const response = await fetch(url);
-        if (!response.ok) throw new Error('Network response was not ok');
         const data = await response.json();
         allArticles = data.articles;
         displayNews(allArticles);
