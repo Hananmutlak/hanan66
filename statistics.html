@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><script type="importmap">{"imports":{"iloiN":"/js/sw.js"}}</script><script type="module" src="/statistics.f958a502.js"></script><script type="module" src="/map.f08b1929.js"></script><link rel="stylesheet" href="/map.672c2838.css"><script type="module" src="/news.6a63a89d.js"></script>
+<head><script type="importmap">{"imports":{"iloiN":"/js/sw.js"}}</script><script type="module" src="/map.f08b1929.js"></script><link rel="stylesheet" href="/map.672c2838.css"><script type="module" src="/news.6a63a89d.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- إضافة وصف الموقع -->
-    <meta name="description" content="Track global disease statistics and prevention methods with real-time updates">
-    <title>Global Disease Tracker</title>
-    <link rel="icon" type="image/x-icon" href="/virus1.4e8f66fe.svg">
+    <!-- إضافة وصف الميتا المطلوب -->
+    <meta name="description" content="View detailed statistics and charts for global disease tracking including COVID-19 and Flu data">
+    <title>Statistics - Global Disease Tracker</title>
     <link rel="stylesheet" href="/projecthanan.b10d73a7.css">
-    <link rel="stylesheet" href="/projecthanan.4563003b.css">
-    <!-- إضافة سكيورتي للأيقونات -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="icon" type="image/x-icon" href="/virus1.4e8f66fe.svg">
+   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+   
+
+    <meta name="robots" content="index, follow">
 </head>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="/statistics.f958a502.js" type="module"></script>
 <body>
     <header>
         <nav aria-label="Main Navigation">
@@ -20,13 +24,13 @@
                     <img src="/virus1.4283a445.png" alt="Global Disease Tracker Logo" class="logo" width="120" height="40">
                 </a>
             </div>
-            <button class="menu-icon" aria-label="Toggle Menu" aria-expanded="false" aria-controls="nav-links">&#9776;</button>
-            <div class="nav-links" id="nav-links" role="navigation">
+            <button class="menu-icon" aria-label="Toggle Menu" aria-expanded="false">&#9776;</button>
+            <div class="nav-links" role="navigation">
                 <a href="/index.html" class="nav-link">
                     <i class="fas fa-home" aria-hidden="true"></i>
                     <span>Home</span>
                 </a>
-                <a href="/statistics.html" class="nav-link">
+                <a href="/statistics.html" class="nav-link active" aria-current="page">
                     <i class="fas fa-chart-line" aria-hidden="true"></i>
                     <span>Statistics</span>
                 </a>
@@ -42,7 +46,7 @@
                     <i class="fas fa-envelope" aria-hidden="true"></i>
                     <span>Contact</span>
                 </a>
-                <a href="/news.html" class="nav-link active" aria-current="page">
+                <a href="/news.html" class="nav-link">
                     <i class="fas fa-newspaper" aria-hidden="true"></i>
                     <span>News</span>
                 </a>
@@ -51,12 +55,24 @@
     </header>
 
     <main>
-        <!-- قسم الهيرو كما هو تمامًا -->
-        <section class="hero">
-            <div class="hero-content">
-                <h1>Global Disease Tracker</h1>
-                <p>Stay informed about the latest disease statistics and prevention methods.</p>
-                <a href="/news.html" class="hero-button">Explore News</a>
+        <section class="statistics-section" aria-labelledby="stats-heading">
+            <h2 id="stats-heading">Disease Statistics</h2>
+            
+            <div class="input-group">
+                <label for="diseaseSelect" id="diseaseLabel">Select a Disease:</label>
+                <select id="diseaseSelect" aria-labelledby="diseaseLabel">
+                    <option value="covid">COVID-19</option>
+                    <option value="flu">Flu</option>
+                </select>
+            </div>
+            
+            <div class="charts-container">
+                <div class="chart-wrapper" role="region" aria-label="Main Disease Statistics Chart">
+                    <canvas id="mainChart"></canvas>
+                </div>
+                <div class="chart-wrapper" role="region" aria-label="Disease Distribution Pie Chart">
+                    <canvas id="pieChart"></canvas>
+                </div>
             </div>
         </section>
     </main>
@@ -77,7 +93,7 @@
             </div>
         </div>
     </footer>
-
+  
     <script src="/projecthanan.b828852a.js" type="module"></script>
 </body>
 </html>
