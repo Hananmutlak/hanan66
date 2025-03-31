@@ -1,11 +1,13 @@
 {
   "name": "hanan3",
   "version": "1.0.0",
+  "type": "module",
   "scripts": {
     "start": "parcel src/index.html",
-   "build": "parcel build src/*.html --public-url ./ --no-scope-hoist --no-source-maps",
+    "build": "parcel build src/*.html --public-url ./ --no-scope-hoist",
     "docs": "jsdoc src/js -d docs",
     "deploy": "npm run build && gh-pages -d dist"
+    
   },
   "dependencies": {
     "chart.js": "^4.0.0",

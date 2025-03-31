@@ -89,13 +89,12 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register(new URL('./sw.js', import.meta.url))
-        .then(registration => {
-          console.log('Service Worker registered with scope:', registration.scope);
-        })
-        .catch(error => {
-          console.error('Service Worker registration failed:', error);
-        });
+        navigator.serviceWorker.register(new URL('../sw.js', import.meta.url), {
+            scope: '/',
+            type: 'module'
+          })
+        .then(reg => console.log('SW registered:', reg))
+        .catch(err => console.log('SW registration failed:', err));
     });
   }
   
