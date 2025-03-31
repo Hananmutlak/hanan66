@@ -156,11 +156,11 @@
       });
     }
   }
-})({"jAjjb":[function(require,module,exports,__globalThis) {
+})({"l3TcX":[function(require,module,exports,__globalThis) {
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
-var HMR_SERVER_PORT = 54135;
+var HMR_SERVER_PORT = 1234;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "439701173a9199ea";
 var HMR_USE_SSE = false;
@@ -802,6 +802,6 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}]},["jAjjb","hlJHp"], "hlJHp", "parcelRequire1875")
+},{}]},["l3TcX","hlJHp"], "hlJHp", "parcelRequire1875")
 
 //# sourceMappingURL=news.6a63a89d.js.map
