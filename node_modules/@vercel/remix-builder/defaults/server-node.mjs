@@ -1,16 +1,21 @@
 import {
   createRequestHandler as createRemixRequestHandler,
+  createReadableStreamFromReadable,
   writeReadableStreamToWritable,
   installGlobals,
 } from '@remix-run/node';
+import * as build from '@remix-run/dev/server-build';
 
 installGlobals({
   nativeFetch:
-    parseInt(process.versions.node, 10) >= 20 &&
-    process.env.VERCEL_REMIX_NATIVE_FETCH === '1',
+    // Explicit opt-in to native fetch via runtime env var
+    (parseInt(process.versions.node, 10) >= 20 &&
+      process.env.VERCEL_REMIX_NATIVE_FETCH === '1') ||
+    // `unstable_singleFetch` future flag added in Remix v2.9.0
+    build.future.unstable_singleFetch ||
+    // `v3_singleFetch` future flag stabilized in Remix v2.13.0
+    build.future.v3_singleFetch,
 });
-
-import * as build from '@remix-run/dev/server-build';
 
 const handleRequest = createRemixRequestHandler(
   build.default || build,
@@ -55,7 +60,8 @@ function createRemixRequest(req, res) {
   };
 
   if (req.method !== 'GET' && req.method !== 'HEAD') {
-    init.body = req;
+    init.body = createReadableStreamFromReadable(req);
+    init.duplex = 'half';
   }
 
   return new Request(url.href, init);

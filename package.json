@@ -6,7 +6,7 @@
     "start": "parcel src/index.html",
     "dev": "parcel src/*.html",
     "build": "parcel build src/*.html --public-url ./ --no-scope-hoist --dist-dir dist",
-    "build:vercel": "npm run build",
+    "build:vercel": "npm install && npm run build",
     "optimize-images": "imagemin src/assets/images/*.{png,jpg,jpeg,svg} --out-dir=dist/assets/images --plugin=mozjpeg --plugin=pngquant --plugin=svgo",
     "convert-webp": "imagemin src/assets/images/*.{png,jpg,jpeg} --out-dir=dist/assets/images --plugin=webp",
     "docs": "jsdoc src/js -d docs",
@@ -25,13 +25,13 @@
     "@parcel/packager-js": "^2.14.4",
     "@parcel/transformer-sass": "^2.14.4",
     "imagemin": "^8.0.0",
-    "imagemin-webp": "^7.0.0",
+    "imagemin-webp": "^6.1.0",
     "jsdoc": "^4.0.4",
     "parcel": "^2.14.4",
     "rimraf": "^6.0.1",
     "sass": "^1.86.0",
     "svgo": "^3.3.2",
-    "vercel": "^34.0.0"
+    "vercel": "^41.4.1"
   },
   "browserslist": [
     ">0.2%",
