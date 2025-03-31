@@ -379,7 +379,7 @@ footer {
     margin-top: 2rem;
 }
 /* تعديلات على شريط البحث */
-/* تعديلات على شريط البحث */
+
 .search-container {
     display: flex;
     align-items: center;
@@ -408,7 +408,8 @@ footer {
         min-height: 48px; /* ضمان ارتفاع كافٍ */
 
         &:hover {
-            background-color: darken(#FF6500, 10%); /* تغميق اللون عند التحويم */
+            background-color: color.adjust(#FF6500, $lightness: -10%);
+
         }
     }
 }

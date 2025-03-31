@@ -11,6 +11,7 @@
   entry,
   mainEntry,
   parcelRequireName,
+  externals,
   distDir,
   publicUrl,
   devServer
@@ -44,6 +45,9 @@
   function newRequire(name, jumped) {
     if (!cache[name]) {
       if (!modules[name]) {
+        if (externals[name]) {
+          return externals[name];
+        }
         // if we cannot find the module within our internal map or
         // cache jump to the current global require ie. the last bundle
         // that was added to the page.
@@ -156,7 +160,7 @@
       });
     }
   }
-})({"56AJI":[function(require,module,exports,__globalThis) {
+})({"93v64":[function(require,module,exports,__globalThis) {
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
@@ -288,7 +292,8 @@ if (!parent || !parent.isParcelRequire) {
         if (typeof WebSocket !== 'undefined') try {
             ws = new WebSocket(protocol + '://' + hostname + (port ? ':' + port : '') + '/');
         } catch (err) {
-            if (err.message) console.error(err.message);
+            // Ignore cloudflare workers error.
+            if (err.message && !err.message.includes('Disallowed operation called within global scope')) console.error(err.message);
         }
     }
     if (ws) {
@@ -25199,6 +25204,6 @@ function index_esm(input) {
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"i5bin":[function(require,module,exports,__globalThis) {
 module.exports = module.bundle.resolve("js\\sw.js");
 
-},{}]},["56AJI","lhpGb"], "lhpGb", "parcelRequire1875", "./", "/")
+},{}]},["93v64","lhpGb"], "lhpGb", "parcelRequire1875", {}, "./", "/")
 
 //# sourceMappingURL=projecthanan.b828852a.js.map
