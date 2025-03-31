@@ -748,6 +748,9 @@ if ('serviceWorker' in navigator) window.addEventListener('load', ()=>{
         console.error('Service Worker registration failed:', error);
     });
 });
+if ('serviceWorker' in navigator) navigator.serviceWorker.getRegistrations().then((registrations)=>{
+    registrations.forEach((registration)=>registration.unregister());
+});
 
 },{"./map.js":"3xMZD","./charts.js":"WUUf9","./news.js":"hlJHp","3e4a993a1cf4f24b":"i5bin"}],"3xMZD":[function(require,module,exports,__globalThis) {
 /**

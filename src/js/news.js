@@ -47,9 +47,9 @@ async function fetchNewsForCountry(country) {
     newsContainer.innerHTML = `<p>Loading news for ${country}...</p>`;
     
     try {
-        const apiKey = '8cf220f2e3f548b78aa38afc2f12b039';
+        const apiKey = '67b38ed3bd76b1a98e9f01a125bbfffb';
         const query = `(disease OR pandemic OR outbreak OR virus OR infection) AND ${country}`;
-        const url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(query) }&language=en&sortBy=publishedAt&apiKey=${apiKey}`;
+        const url = `https://gnews.io/api/v4/top-headlines?category=health&lang=en&token=${apiKey}`;
         
         const response = await fetch(url);
         
@@ -75,7 +75,7 @@ async function fetchNews() {
     if (!newsContainer) return;
     
     const apiKey = '8cf220f2e3f548b78aa38afc2f12b039';
-    const url = `https://newsapi.org/v2/top-headlines?category=health&language=en&apiKey=${apiKey}`;
+    const url = `http://newsapi.org/v2/top-headlines?category=health&language=en&apiKey=${apiKey}`;
 
     try {
         // Display loading message while fetching the data
@@ -120,7 +120,7 @@ function displayNews(articles) {
         .slice(0, 12) // Display only the first 12 articles
         .map(article => `
             <div class="news-article">
-                <img src="${article.urlToImage || 'https://via.placeholder.com/300?text=No+Image'}" alt="News Image">
+                <img src="${article.urlToImage || 'http://via.placeholder.com/300?text=No+Image'}" alt="News Image">
                 <div class="news-content">
                     <h3><a href="${article.url}" target="_blank">${article.title || "No title available"}</a></h3>
                     <p>${article.description ? article.description.substring(0, 80)  + '...' : "No description available."}</p>
