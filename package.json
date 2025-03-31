@@ -1,5 +1,5 @@
 {
-  "name": "projecthanan",
+  "name": "sjukdom10",
   "version": "1.0.0",
   "scripts": {
     "start": "parcel src/index.html",
@@ -11,8 +11,7 @@
     "docs": "jsdoc src/js -d docs",
     "clean-docs": "rimraf docs",
     "generate-docs": "npm run clean-docs && npm run docs",
-   
-    "deploy": "gh-pages -d dist"
+    "deploy": "npm run build && gh-pages -d dist"
   },
   "dependencies": {
     "chart.js": "^4.0.0",
