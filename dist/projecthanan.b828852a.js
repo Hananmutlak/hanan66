@@ -160,11 +160,11 @@
       });
     }
   }
-})({"ByxB4":[function(require,module,exports,__globalThis) {
+})({"2xfHA":[function(require,module,exports,__globalThis) {
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
-var HMR_SERVER_PORT = 51881;
+var HMR_SERVER_PORT = 52086;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "439701173a9199ea";
 var HMR_USE_SSE = false;
@@ -773,7 +773,7 @@ var _leaflet = require("leaflet");
 var _leafletDefault = parcelHelpers.interopDefault(_leaflet);
 var _leafletCss = require("leaflet/dist/leaflet.css");
 // استيراد المفاتيح من ملف التهيئة
-var _configJs = require("./config.js");
+var _configJs = require("/src/js/config.js");
 /**
  * Global variable to store the Leaflet map instance.
  * @type {L.Map}
@@ -1094,7 +1094,7 @@ function getSelectedCountry() {
     return selectedCountry;
 }
 
-},{"leaflet":"gzvEd","leaflet/dist/leaflet.css":"6JhOO","./config.js":"2hPh4","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"gzvEd":[function(require,module,exports,__globalThis) {
+},{"leaflet":"gzvEd","leaflet/dist/leaflet.css":"6JhOO","/src/js/config.js":"2hPh4","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"gzvEd":[function(require,module,exports,__globalThis) {
 /* @preserve
  * Leaflet 1.9.4, a JS library for interactive maps. https://leafletjs.com
  * (c) 2010-2023 Vladimir Agafonkin, (c) 2010-2011 CloudMade
@@ -25296,6 +25296,6 @@ function index_esm(input) {
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"4iTwc":[function(require,module,exports,__globalThis) {
 module.exports = module.bundle.resolve("sw.5182e6ed.js");
 
-},{}]},["ByxB4","lhpGb"], "lhpGb", "parcelRequire5828", {}, "./", "/")
+},{}]},["2xfHA","lhpGb"], "lhpGb", "parcelRequire5828", {}, "./", "/")
 
 //# sourceMappingURL=projecthanan.b828852a.js.map
