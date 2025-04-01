@@ -467,3 +467,57 @@ footer {
         right: 15px;
     }
 }
+/* Weather and Air Quality Styles */
+#country-weather, #country-air {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.weather-card, .air-card {
+    padding: 15px;
+    background: white;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.weather-main {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.weather-temp {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-left: 15px;
+}
+
+.aqi-value {
+    font-size: 3rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 15px 0;
+    padding: 10px;
+    border-radius: 6px;
+    
+    &.good { background-color: #4CAF50; color: white; }
+    &.moderate { background-color: #FFEB3B; }
+    &.unhealthy-sensitive { background-color: #FF9800; color: white; }
+    &.unhealthy { background-color: #F44336; color: white; }
+    &.very-unhealthy { background-color: #9C27B0; color: white; }
+    &.hazardous { background-color: #795548; color: white; }
+}
+
+.aqi-level {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.weather-details p, .air-details p {
+    margin: 5px 0;
+    color: #555;
+}

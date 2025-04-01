@@ -160,15 +160,15 @@
       });
     }
   }
-})({"6CeOZ":[function(require,module,exports,__globalThis) {
+})({"CtfwU":[function(require,module,exports,__globalThis) {
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
-var HMR_SERVER_PORT = 1234;
+var HMR_SERVER_PORT = 58593;
 var HMR_SECURE = false;
-var HMR_ENV_HASH = "767298212a9fba37";
+var HMR_ENV_HASH = "439701173a9199ea";
 var HMR_USE_SSE = false;
-module.bundle.HMR_BUNDLE_ID = "92b4c3a2c3040389";
+module.bundle.HMR_BUNDLE_ID = "117fb0ab5182e6ed";
 "use strict";
 /* global HMR_HOST, HMR_PORT, HMR_SERVER_PORT, HMR_ENV_HASH, HMR_SECURE, HMR_USE_SSE, chrome, browser, __parcel__import__, __parcel__importScripts__, ServiceWorkerGlobalScope */ /*::
 import type {
@@ -666,7 +666,7 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
     }
 }
 
-},{}],"a7EUI":[function(require,module,exports,__globalThis) {
+},{}],"jMyWQ":[function(require,module,exports,__globalThis) {
 /// <reference lib="WebWorker" />
 const self = globalThis.self;
 const CACHE_NAME = 'hanan66-final-v3';
@@ -806,6 +806,6 @@ self.addEventListener('message', (event)=>{
     }
 });
 
-},{}]},["6CeOZ","a7EUI"], "a7EUI", "parcelRequire5828", {})
+},{}]},["CtfwU","jMyWQ"], "jMyWQ", "parcelRequire5828", {})
 
-//# sourceMappingURL=sw.js.map
+//# sourceMappingURL=sw.5182e6ed.js.map

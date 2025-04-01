@@ -160,11 +160,11 @@
       });
     }
   }
-})({"c73Dv":[function(require,module,exports,__globalThis) {
+})({"fN3xd":[function(require,module,exports,__globalThis) {
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
-var HMR_SERVER_PORT = 1234;
+var HMR_SERVER_PORT = 58593;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "439701173a9199ea";
 var HMR_USE_SSE = false;
@@ -669,64 +669,24 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 },{}],"hlJHp":[function(require,module,exports,__globalThis) {
 /**
  * @module NewsModule
- * @description Handles fetching and displaying health-related news with country integration
- */ // Global variables
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "fetchNewsForCountry", ()=>fetchNewsForCountry);
+ * @description Handles fetching and displaying health-related news
+ */ const NEWS_API_KEY = 'YOUR_GNEWS_API_KEY';
 const newsContainer = document.getElementById('newsContainer');
-let currentCountry = '';
-/**
- * Initializes the news module and sets up event listeners
- */ function initNewsModule() {
-    // Listen for country selection events from the map
-    document.addEventListener('countrySelected', handleCountrySelected);
-    // Fetch general health news on initial load
+function initNewsModule() {
     fetchNews();
 }
-/**
- * Handles the country selection event from the map
- * @param {CustomEvent} event - The country selection event
- */ function handleCountrySelected(event) {
-    if (event.detail?.country) {
-        currentCountry = event.detail.country;
-        fetchNewsForCountry(currentCountry);
-    }
-}
-/**
- * Fetches news specifically for the selected country
- * @param {string} country - The country to fetch news for
- */ async function fetchNewsForCountry(country) {
-    if (!newsContainer) return;
-    updateNewsHeading(`Latest Disease News for ${country}`);
-    showLoadingMessage(`Loading news for ${country}...`);
-    try {
-        const apiKey = '6757b6f31a9eb5abba3c0fd90dcef209'; // استبدل بمفتاحك الفعلي
-        const url = `https://api.mediastack.com/v1/news?access_key=${apiKey}&languages=en&country=${getCountryCode(country)}&categories=health`;
-        const response = await fetch(url);
-        handleResponse(response);
-    } catch (error) {
-        showErrorMessage(`Error fetching news: ${error.message}`);
-    }
-}
-/**
- * Fetches general health news
- */ async function fetchNews() {
+async function fetchNews() {
     if (!newsContainer) return;
     showLoadingMessage("Loading latest health news...");
     try {
-        const apiKey = '6757b6f31a9eb5abba3c0fd90dcef209'; // استبدل بمفتاحك الفعلي
-        const url = `https://api.mediastack.com/v1/news?access_key=${apiKey}&languages=en&categories=health`;
+        const url = `https://gnews.io/api/v4/top-headlines?category=health&lang=en&max=10&apikey=${NEWS_API_KEY}`;
         const response = await fetch(url);
-        handleResponse(response);
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+        const data = await response.json();
+        displayNews(data.articles);
     } catch (error) {
         showErrorMessage(`Error fetching news: ${error.message}`);
     }
-}
-// Helper functions
-function updateNewsHeading(text) {
-    const newsHeading = document.querySelector('#news h2');
-    if (newsHeading) newsHeading.textContent = text;
 }
 function showLoadingMessage(msg) {
     newsContainer.innerHTML = `<div class="loading-spinner"><p>${msg}</p></div>`;
@@ -734,30 +694,16 @@ function showLoadingMessage(msg) {
 function showErrorMessage(msg) {
     newsContainer.innerHTML = `<p class="error">${msg}</p>`;
 }
-function handleResponse(response) {
-    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-    return response.json().then((data)=>displayNews(data.data));
-}
-function getCountryCode(countryName) {
-    const countryCodes = {
-        'usa': 'us',
-        'united states': 'us',
-        'sweden': 'se'
-    };
-    return countryCodes[countryName.toLowerCase()] || 'us';
-}
-/**
- * Displays news articles
- * @param {Array} articles - Array of news articles
- */ function displayNews(articles) {
+function displayNews(articles) {
     if (!articles?.length) {
         newsContainer.innerHTML = "<p>No news articles found.</p>";
         return;
     }
-    newsContainer.innerHTML = articles.slice(0, 12).map((article)=>` 
+    newsContainer.innerHTML = articles.map((article)=>` 
         <article class="news-article">
-    <img src="${article.image || './assets/images/news-placeholder.jpng'}" 
-     onerror="this.src='./assets/images/news-placeholder.jpng'">
+            <img src="${article.image || './assets/images/news-placeholder.jpg'}" 
+                 alt="${article.title || 'News image'}"
+                 onerror="this.src='./assets/images/news-placeholder.jpg'">
             <div class="news-content">
                 <h3><a href="${article.url}" target="_blank" rel="noopener noreferrer">
                     ${article.title || "No title available"}
@@ -765,46 +711,15 @@ function getCountryCode(countryName) {
                 <p>${article.description?.substring(0, 100) || "No description available"}...</p>
                 <footer>
                     <span>${article.source?.name || "Unknown source"}</span>
-                    <time>${new Date(article.published_at).toLocaleDateString()}</time>
+                    <time>${new Date(article.publishedAt).toLocaleDateString()}</time>
                 </footer>
             </div>
         </article>
     `).join('');
 }
-// Initialize when DOM is ready
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initNewsModule);
 else initNewsModule();
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"jnFvT":[function(require,module,exports,__globalThis) {
-exports.interopDefault = function(a) {
-    return a && a.__esModule ? a : {
-        default: a
-    };
-};
-exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, '__esModule', {
-        value: true
-    });
-};
-exports.exportAll = function(source, dest) {
-    Object.keys(source).forEach(function(key) {
-        if (key === 'default' || key === '__esModule' || Object.prototype.hasOwnProperty.call(dest, key)) return;
-        Object.defineProperty(dest, key, {
-            enumerable: true,
-            get: function() {
-                return source[key];
-            }
-        });
-    });
-    return dest;
-};
-exports.export = function(dest, destName, get) {
-    Object.defineProperty(dest, destName, {
-        enumerable: true,
-        get: get
-    });
-};
-
-},{}]},["c73Dv","hlJHp"], "hlJHp", "parcelRequire5828", {})
+},{}]},["fN3xd","hlJHp"], "hlJHp", "parcelRequire5828", {})
 
 //# sourceMappingURL=news.6a63a89d.js.map

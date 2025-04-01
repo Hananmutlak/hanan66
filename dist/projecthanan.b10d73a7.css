@@ -88,18 +88,18 @@ footer {
 }
 
 .floating-germs .germ:first-child {
-  top: 4%;
-  left: 78%;
+  top: 85%;
+  left: 24%;
 }
 
 .floating-germs .germ:nth-child(2) {
-  top: 49%;
-  left: 45%;
+  top: 64%;
+  left: 12%;
 }
 
 .floating-germs .germ:nth-child(3) {
-  top: 84%;
-  left: 62%;
+  top: 35%;
+  left: 54%;
 }
 
 .prevention-cards {
@@ -475,5 +475,81 @@ footer {
     bottom: 15px;
     right: 15px;
   }
+}
+
+#country-weather, #country-air {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  margin-top: 30px;
+  padding: 20px;
+  box-shadow: 0 2px 4px #0000001a;
+}
+
+.weather-card, .air-card {
+  background: #fff;
+  border-radius: 6px;
+  padding: 15px;
+  box-shadow: 0 1px 3px #0000001a;
+}
+
+.weather-main {
+  align-items: center;
+  margin: 10px 0;
+  display: flex;
+}
+
+.weather-temp {
+  margin-left: 15px;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.aqi-value {
+  text-align: center;
+  border-radius: 6px;
+  margin: 15px 0;
+  padding: 10px;
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.aqi-value.good {
+  color: #fff;
+  background-color: #4caf50;
+}
+
+.aqi-value.moderate {
+  background-color: #ffeb3b;
+}
+
+.aqi-value.unhealthy-sensitive {
+  color: #fff;
+  background-color: #ff9800;
+}
+
+.aqi-value.unhealthy {
+  color: #fff;
+  background-color: #f44336;
+}
+
+.aqi-value.very-unhealthy {
+  color: #fff;
+  background-color: #9c27b0;
+}
+
+.aqi-value.hazardous {
+  color: #fff;
+  background-color: #795548;
+}
+
+.aqi-level {
+  text-align: center;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.weather-details p, .air-details p {
+  color: #555;
+  margin: 5px 0;
 }
 /*# sourceMappingURL=projecthanan.b10d73a7.css.map */

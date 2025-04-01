@@ -319,20 +319,20 @@ body.contact-page .floating-germs .germ:hover {
 
 body.contact-page .floating-germs .germ:first-child {
   animation-duration: 11s;
-  top: 25%;
-  left: 63%;
+  top: 84%;
+  left: 10%;
 }
 
 body.contact-page .floating-germs .germ:nth-child(2) {
-  animation-duration: 10s;
-  top: 69%;
-  left: 87%;
+  animation-duration: 15s;
+  top: 72%;
+  left: 50%;
 }
 
 body.contact-page .floating-germs .germ:nth-child(3) {
-  animation-duration: 6s;
-  top: 73%;
-  left: 69%;
+  animation-duration: 9s;
+  top: 9%;
+  left: 78%;
 }
 
 @keyframes germFloat {
