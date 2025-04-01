@@ -41,7 +41,7 @@ async function fetchNewsForCountry(country) {
     
     try {
         const apiKey = '6757b6f31a9eb5abba3c0fd90dcef209'; // استبدل بمفتاحك الفعلي
-        const url = `http://api.mediastack.com/v1/news?access_key=${apiKey}&languages=en&country=${getCountryCode(country)}&categories=health`;
+        const url = `https://api.mediastack.com/v1/news?access_key=${apiKey}&languages=en&country=${getCountryCode(country)}&categories=health`;
 
         const response = await fetch(url);
         handleResponse(response);
@@ -60,7 +60,7 @@ async function fetchNews() {
     
     try {
         const apiKey = '6757b6f31a9eb5abba3c0fd90dcef209'; // استبدل بمفتاحك الفعلي
-        const url = `http://api.mediastack.com/v1/news?access_key=${apiKey}&languages=en&categories=health`;
+        const url = `https://api.mediastack.com/v1/news?access_key=${apiKey}&languages=en&categories=health`;
         
         const response = await fetch(url);
         handleResponse(response);
