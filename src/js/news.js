@@ -112,8 +112,8 @@ function displayNews(articles) {
 
     newsContainer.innerHTML = articles.slice(0, 12).map(article => ` 
         <article class="news-article">
-            <img src="${article.image || 'https://via.placeholder.com/300?text=No+Image'}" 
-                 alt="${article.title || 'News image'}">
+    <img src="${article.image || './assets/images/news-placeholder.jpng'}" 
+     onerror="this.src='./assets/images/news-placeholder.jpng'">
             <div class="news-content">
                 <h3><a href="${article.url}" target="_blank" rel="noopener noreferrer">
                     ${article.title || "No title available"}

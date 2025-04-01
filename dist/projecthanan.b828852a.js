@@ -667,6 +667,8 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 }
 
 },{}],"lhpGb":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
 var _mapJs = require("./map.js");
 var _chartsJs = require("./charts.js");
 var _newsJs = require("./news.js");
@@ -739,20 +741,16 @@ function createNewsButton(container) {
 }
 // تسجيل Service Worker (منفصل عن DOMContentLoaded)
 window.addEventListener('load', ()=>{
-    if ('serviceWorker' in navigator) {
-        const swUrl = new URL(require("15e43e4ca68958ae")).href;
-        navigator.serviceWorker.register(swUrl, {
-            scope: '/hanan66/',
-            type: 'module'
-        }).then((reg)=>{
-            console.log('Service Worker registered with scope:', reg.scope);
-            // التحقق من التحديثات كل ساعة
-            setInterval(()=>reg.update(), 3600000);
-        }).catch((err)=>console.error('Service Worker registration failed:', err));
-    }
+    if ('serviceWorker' in navigator) navigator.serviceWorker.register(require("3e4a993a1cf4f24b"), {
+        scope: './'
+    }).then((registration)=>{
+        console.log('ServiceWorker registration successful');
+    }).catch((err)=>{
+        console.log('ServiceWorker registration failed: ', err);
+    });
 });
 
-},{"./map.js":"3xMZD","./charts.js":"WUUf9","./news.js":"hlJHp","15e43e4ca68958ae":"4iTwc"}],"3xMZD":[function(require,module,exports,__globalThis) {
+},{"./map.js":"3xMZD","./charts.js":"WUUf9","./news.js":"hlJHp","3e4a993a1cf4f24b":"i5bin","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"3xMZD":[function(require,module,exports,__globalThis) {
 /**
  * @module MapIntegration
  * @description Enhanced Leaflet map implementation with news integration
@@ -25204,8 +25202,8 @@ function index_esm(input) {
     return new Color(input);
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"4iTwc":[function(require,module,exports,__globalThis) {
-module.exports = module.bundle.resolve("sw.5182e6ed.js");
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"i5bin":[function(require,module,exports,__globalThis) {
+module.exports = module.bundle.resolve("js\\sw.js");
 
 },{}]},["93v64","lhpGb"], "lhpGb", "parcelRequire5828", {}, "./", "/")
 

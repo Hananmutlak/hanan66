@@ -88,17 +88,16 @@ function createNewsButton(container) {
 // تسجيل Service Worker (منفصل عن DOMContentLoaded)
 window.addEventListener('load', () => {
     if ('serviceWorker' in navigator) {
-        const swUrl = new URL('sw.js', import.meta.url).href;
-        navigator.serviceWorker.register(swUrl, {
-            scope: '/hanan66/',
-            type: 'module'
-        })
-        .then(reg => {
-            console.log('Service Worker registered with scope:', reg.scope);
-            
-            // التحقق من التحديثات كل ساعة
-            setInterval(() => reg.update(), 60 * 60 * 1000);
-        })
-        .catch(err => console.error('Service Worker registration failed:', err));
-    }
+        navigator.serviceWorker.register(new URL('./sw.js', import.meta.url), {
+          scope: './',
+          type: 'module'
+        }).then(registration => {
+          console.log('ServiceWorker registration successful');
+        }).catch(err => {
+          console.log('ServiceWorker registration failed: ', err);
+        });
+      }
 });
+
+
+export {};

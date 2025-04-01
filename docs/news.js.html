@@ -51,9 +51,8 @@ function initNewsModule() {
  * @param {CustomEvent} event - The country selection event
  */
 function handleCountrySelected(event) {
-    if (event.detail &amp;&amp; event.detail.country) {
+    if (event.detail?.country) {
         currentCountry = event.detail.country;
-        // Update news with the selected country
         fetchNewsForCountry(currentCountry);
     }
 }
@@ -65,110 +64,105 @@ function handleCountrySelected(event) {
 async function fetchNewsForCountry(country) {
     if (!newsContainer) return;
     
-    // Update heading if it exists
-    const newsHeading = document.querySelector('#news h2');
-    if (newsHeading) {
-        newsHeading.textContent = `Latest Disease News for ${country}`;
-    }
-    
-    // Display loading message
-    newsContainer.innerHTML = `&lt;p>Loading news for ${country}...&lt;/p>`;
+    updateNewsHeading(`Latest Disease News for ${country}`);
+    showLoadingMessage(`Loading news for ${country}...`);
     
     try {
-        const apiKey = '8cf220f2e3f548b78aa38afc2f12b039';
-        const query = `(disease OR pandemic OR outbreak OR virus OR infection) AND ${country}`;
-        const url = `http://newsapi.org/v2/everything?q=${encodeURIComponent(query) }&amp;language=en&amp;sortBy=publishedAt&amp;apiKey=${apiKey}`;
-        
+        const apiKey = '6757b6f31a9eb5abba3c0fd90dcef209'; // استبدل بمفتاحك الفعلي
+        const url = `https://api.mediastack.com/v1/news?access_key=${apiKey}&amp;languages=en&amp;country=${getCountryCode(country)}&amp;categories=health`;
+
         const response = await fetch(url);
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        
-        const data = await response.json();
-        displayNews(data.articles);
+        handleResponse(response);
     } catch (error) {
-        newsContainer.innerHTML = `&lt;p class="error">Error fetching news: ${error.message}&lt;/p>`;
+        showErrorMessage(`Error fetching news: ${error.message}`);
     }
 }
 
 /**
- * Fetches the latest health-related news using NewsAPI.
- * Displays the news articles in the `newsContainer` element.
- * 
- * @async
- * @function fetchNews
+ * Fetches general health news
  */
 async function fetchNews() {
     if (!newsContainer) return;
     
-    const apiKey = '8cf220f2e3f548b78aa38afc2f12b039';
-    const url = `http://newsapi.org/v2/top-headlines?category=health&amp;language=en&amp;apiKey=${apiKey}`;
-
+    showLoadingMessage("Loading latest health news...");
+    
     try {
-        // Display loading message while fetching the data
-        newsContainer.innerHTML = `&lt;p>Loading news...&lt;/p>`;
+        const apiKey = '6757b6f31a9eb5abba3c0fd90dcef209'; // استبدل بمفتاحك الفعلي
+        const url = `https://api.mediastack.com/v1/news?access_key=${apiKey}&amp;languages=en&amp;categories=health`;
         
-        // Fetch the data from the NewsAPI
-        const response = await fetch(url) ;
-
-        // If the response is not okay, throw an error
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        // Convert the response to JSON format
-        const data = await response.json();
-        
-        // Display the fetched articles
-        displayNews(data.articles);
+        const response = await fetch(url);
+        handleResponse(response);
     } catch (error) {
-        // Handle errors and display an error message
-        newsContainer.innerHTML = `&lt;p class="error">Error fetching news: ${error.message}&lt;/p>`;
+        showErrorMessage(`Error fetching news: ${error.message}`);
     }
 }
 
+// Helper functions
+function updateNewsHeading(text) {
+    const newsHeading = document.querySelector('#news h2');
+    if (newsHeading) newsHeading.textContent = text;
+}
+
+function showLoadingMessage(msg) {
+    newsContainer.innerHTML = `&lt;div class="loading-spinner">&lt;p>${msg}&lt;/p>&lt;/div>`;
+}
+
+function showErrorMessage(msg) {
+    newsContainer.innerHTML = `&lt;p class="error">${msg}&lt;/p>`;
+}
+
+function handleResponse(response) {
+    if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return response.json().then(data => displayNews(data.data));
+}
+
+function getCountryCode(countryName) {
+    const countryCodes = {
+        'usa': 'us',
+        'united states': 'us',
+        'sweden': 'se',
+        // أضف المزيد من الدول حسب الحاجة
+    };
+    return countryCodes[countryName.toLowerCase()] || 'us';
+}
+
 /**
- * Displays the news articles in the `newsContainer` element.
- * 
- * @function displayNews
- * @param {Array} articles - An array of news article objects.
+ * Displays news articles
+ * @param {Array} articles - Array of news articles
  */
 function displayNews(articles) {
-    if (!newsContainer) return;
-    
-    // If no articles are found, display a message
-    if (!articles || articles.length === 0) {
+    if (!articles?.length) {
         newsContainer.innerHTML = "&lt;p>No news articles found.&lt;/p>";
         return;
     }
 
-    // Display up to 12 articles in the container
-    newsContainer.innerHTML = articles
-        .slice(0, 12) // Display only the first 12 articles
-        .map(article => `
-            &lt;div class="news-article">
-                &lt;img src="${article.urlToImage || 'http://via.placeholder.com/300?text=No+Image'}" alt="News Image">
-                &lt;div class="news-content">
-                    &lt;h3>&lt;a href="${article.url}" target="_blank">${article.title || "No title available"}&lt;/a>&lt;/h3>
-                    &lt;p>${article.description ? article.description.substring(0, 80)  + '...' : "No description available."}&lt;/p>
-                    &lt;p>&lt;strong>Source:&lt;/strong> ${article.source.name || "Unknown"} | &lt;strong>Date:&lt;/strong> ${new Date(article.publishedAt).toLocaleDateString()}&lt;/p>
-                &lt;/div>
+    newsContainer.innerHTML = articles.slice(0, 12).map(article => ` 
+        &lt;article class="news-article">
+    &lt;img src="${article.image || './assets/images/news-placeholder.jpng'}" 
+     onerror="this.src='./assets/images/news-placeholder.jpng'">
+            &lt;div class="news-content">
+                &lt;h3>&lt;a href="${article.url}" target="_blank" rel="noopener noreferrer">
+                    ${article.title || "No title available"}
+                &lt;/a>&lt;/h3>
+                &lt;p>${article.description?.substring(0, 100) || "No description available"}...&lt;/p>
+                &lt;footer>
+                    &lt;span>${article.source?.name || "Unknown source"}&lt;/span>
+                    &lt;time>${new Date(article.published_at).toLocaleDateString()}&lt;/time>
+                &lt;/footer>
             &lt;/div>
-        `).join('');
+        &lt;/article>
+    `).join('');
 }
 
-/**
- * Event listener that runs once the DOM content is loaded.
- * It initializes the news module.
- * 
- * @event document#DOMContentLoaded
- */
-document.addEventListener('DOMContentLoaded', () => {
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initNewsModule);
+} else {
     initNewsModule();
-});
+}
 
-// Export functions for use in other modules
 export { fetchNewsForCountry };
 </code></pre>
         </article>
@@ -180,13 +174,13 @@ export { fetchNewsForCountry };
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-ChartModule.html">ChartModule</a></li><li><a href="module-MapIntegration.html">MapIntegration</a></li><li><a href="module-NewsModule.html">NewsModule</a></li></ul><h3>Events</h3><ul><li><a href="document.html#event:DOMContentLoaded">DOMContentLoaded</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-ChartModule.html">ChartModule</a></li><li><a href="module-MapIntegration.html">MapIntegration</a></li><li><a href="module-NewsModule.html">NewsModule</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Mon Mar 31 2025 23:39:24 GMT+0200 (Central European Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Tue Apr 01 2025 13:46:08 GMT+0200 (Central European Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>

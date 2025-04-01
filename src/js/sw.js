@@ -1,11 +1,10 @@
-
 /// <reference lib="WebWorker" />
 const self = globalThis.self;
-const CACHE_NAME = 'hanan66-final-v2'; // غيرنا رقم الإصدار
+const CACHE_NAME = 'hanan66-final-v3';
 const API_CACHE_NAME = 'hanan66-api-v1';
-const OFFLINE_URL = '/offline.html';
+const OFFLINE_URL = './offline.html';
 
-const urlsToCache = [
+const CACHE_URLS = [
   './',
   './index.html',
   './statistics.html',
@@ -20,7 +19,8 @@ const urlsToCache = [
   './js/charts.js',
   './assets/images/hero-bg.jpg',
   './assets/images/virus1.svg',
-  './assets/images/virus1.png'
+  './assets/images/virus1.png',
+  './assets/images/news-placeholder.jpg'
 ];
 
 // ===== التثبيت =====
@@ -28,16 +28,30 @@ self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
-        console.log('Opening cache');
-        return cache.addAll(urlsToCache)
-          .then(() => {
-            console.log('All resources cached');
-            return self.skipWaiting();
+        console.log('[SW] Caching app shell');
+        const cachePromises = CACHE_URLS.map(url => {
+          return fetch(new Request(url, {
+            credentials: 'same-origin',
+            redirect: 'follow',
+            mode: 'no-cors'
+          }))
+          .then(response => {
+            if (response.ok || response.type === 'opaque') {
+              return cache.put(url, response);
+            }
+            console.warn(`[SW] Failed to cache ${url}`);
+            return Promise.resolve();
           })
           .catch(err => {
-            console.error('Cache addAll error:', err);
-            throw err;
+            console.warn(`[SW] Skipping ${url}:`, err);
+            return Promise.resolve();
           });
+        });
+        return Promise.all(cachePromises);
+      })
+      .then(() => {
+        console.log('[SW] Skip waiting');
+        return self.skipWaiting();
       })
   );
 });
@@ -50,62 +64,64 @@ self.addEventListener('activate', event => {
         cacheNames
           .filter(name => name !== CACHE_NAME && name !== API_CACHE_NAME)
           .map(name => {
-            console.log('Deleting old cache:', name);
+            console.log(`[SW] Deleting old cache: ${name}`);
             return caches.delete(name);
           })
-      ).then(() => {
-        console.log('Claiming clients');
-        return self.clients.claim();
-      });
+      );
+    })
+    .then(() => {
+      console.log('[SW] Claiming clients');
+      return self.clients.claim();
     })
   );
 });
 
 // ===== معالجة الطلبات =====
 self.addEventListener('fetch', event => {
-  if (event.request.method !== 'GET') return;
+  const request = event.request;
+  
+  // تخطي طلبات غير GET
+  if (request.method !== 'GET') return;
 
-  // طلبات API
-  if (event.request.url.includes('newsapi.org') || 
-      event.request.url.includes('disease.sh')) {
-    event.respondWith(handleApiRequest(event.request));
+  // معالجة طلبات API
+  if (isApiRequest(request)) {
+    event.respondWith(handleApiRequest(request));
     return;
   }
 
-  // الملفات الثابتة
+  // معالجة الملفات الثابتة
   event.respondWith(
-    caches.match(event.request)
-      .then(cached => {
-        if (cached) {
-          console.log('Serving from cache:', event.request.url);
-          return cached;
-        }
-        return fetchAndCache(event.request);
-      })
-      .catch(() => fallbackResponse(event.request))
+    caches.match(request)
+      .then(cached => cached || fetchAndCache(request))
+      .catch(() => fallbackResponse(request))
   );
 });
 
+// ===== دوال مساعدة =====
+function isApiRequest(request) {
+  return request.url.includes('newsapi.org') || 
+         request.url.includes('disease.sh') ||
+         request.url.includes('gnews.io');
+}
+
 async function handleApiRequest(request) {
   try {
-    const httpsRequest = new Request(
-      request.url.replace('http://', 'https://'),
-      request
-    );
+    // تحويل HTTP إلى HTTPS
+    const secureRequest = request.url.startsWith('http:') ?
+      new Request(request.url.replace('http://', 'https://'), request) :
+      request;
     
-    const response = await fetch(httpsRequest);
+    const response = await fetch(secureRequest);
+    
     if (response.ok) {
       const cache = await caches.open(API_CACHE_NAME);
       await cache.put(request, response.clone());
     }
     return response;
   } catch (err) {
-    console.error('API request failed:', err);
+    console.error('[SW] API request failed:', err);
     const cached = await caches.match(request);
-    return cached || new Response(
-      JSON.stringify({error: 'Network error'}),
-      {status: 503, headers: {'Content-Type': 'application/json'}}
-    );
+    return cached || apiErrorResponse();
   }
 }
 
@@ -118,7 +134,7 @@ async function fetchAndCache(request) {
     }
     return response;
   } catch (err) {
-    console.error('Fetch failed:', err);
+    console.error('[SW] Fetch failed:', err);
     throw err;
   }
 }
@@ -126,15 +142,33 @@ async function fetchAndCache(request) {
 function fallbackResponse(request) {
   if (request.mode === 'navigate') {
     return caches.match(OFFLINE_URL) || 
-           new Response('<h1>Offline</h1>', {headers: {'Content-Type': 'text/html'}});
+           offlinePageResponse();
   }
-  return new Response('Offline', {status: 503});
+  return offlineDataResponse();
+}
+
+function apiErrorResponse() {
+  return new Response(
+    JSON.stringify({ error: 'Network error' }),
+    { status: 503, headers: { 'Content-Type': 'application/json' }}
+  );
+}
+
+function offlinePageResponse() {
+  return new Response(
+    '<h1>Offline</h1><p>You are currently offline</p>',
+    { headers: { 'Content-Type': 'text/html' }}
+  );
+}
+
+function offlineDataResponse() {
+  return new Response('Offline', { status: 503 });
 }
 
 // ===== معالجة الرسائل =====
 self.addEventListener('message', event => {
   if (event.data === 'skipWaiting') {
-    console.log('Skipping waiting');
+    console.log('[SW] Skipping waiting');
     self.skipWaiting();
   }
 });
