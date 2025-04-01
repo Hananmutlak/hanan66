@@ -23,9 +23,8 @@ function initNewsModule() {
  * @param {CustomEvent} event - The country selection event
  */
 function handleCountrySelected(event) {
-    if (event.detail && event.detail.country) {
+    if (event.detail?.country) {
         currentCountry = event.detail.country;
-        // Update news with the selected country
         fetchNewsForCountry(currentCountry);
     }
 }
@@ -37,108 +36,103 @@ function handleCountrySelected(event) {
 async function fetchNewsForCountry(country) {
     if (!newsContainer) return;
     
-    // Update heading if it exists
-    const newsHeading = document.querySelector('#news h2');
-    if (newsHeading) {
-        newsHeading.textContent = `Latest Disease News for ${country}`;
-    }
-    
-    // Display loading message
-    newsContainer.innerHTML = `<p>Loading news for ${country}...</p>`;
+    updateNewsHeading(`Latest Disease News for ${country}`);
+    showLoadingMessage(`Loading news for ${country}...`);
     
     try {
-        const apiKey = '8cf220f2e3f548b78aa38afc2f12b039';
-        const query = `(disease OR pandemic OR outbreak OR virus OR infection) AND ${country}`;
-        const url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&language=en&sortBy=publishedAt&apiKey=${apiKey}`;
-        
+        const apiKey = '6757b6f31a9eb5abba3c0fd90dcef209'; // استبدل بمفتاحك الفعلي
+        const url = `http://api.mediastack.com/v1/news?access_key=${apiKey}&languages=en&country=${getCountryCode(country)}&categories=health`;
+
         const response = await fetch(url);
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        
-        const data = await response.json();
-        displayNews(data.articles);
+        handleResponse(response);
     } catch (error) {
-        newsContainer.innerHTML = `<p class="error">Error fetching news: ${error.message}</p>`;
+        showErrorMessage(`Error fetching news: ${error.message}`);
     }
 }
 
 /**
- * Fetches the latest health-related news using NewsAPI.
- * Displays the news articles in the `newsContainer` element.
- * 
- * @async
- * @function fetchNews
+ * Fetches general health news
  */
 async function fetchNews() {
     if (!newsContainer) return;
     
-    const apiKey = '8cf220f2e3f548b78aa38afc2f12b039';
-    const url = `https://newsapi.org/v2/top-headlines?category=health&language=en&apiKey=${apiKey}`;
-
+    showLoadingMessage("Loading latest health news...");
+    
     try {
-        // Display loading message while fetching the data
-        newsContainer.innerHTML = `<p>Loading news...</p>`;
+        const apiKey = '6757b6f31a9eb5abba3c0fd90dcef209'; // استبدل بمفتاحك الفعلي
+        const url = `http://api.mediastack.com/v1/news?access_key=${apiKey}&languages=en&categories=health`;
         
-        // Fetch the data from the NewsAPI
-        const response = await fetch(url) ;
-
-        // If the response is not okay, throw an error
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        // Convert the response to JSON format
-        const data = await response.json();
-        
-        // Display the fetched articles
-        displayNews(data.articles);
+        const response = await fetch(url);
+        handleResponse(response);
     } catch (error) {
-        // Handle errors and display an error message
-        newsContainer.innerHTML = `<p class="error">Error fetching news: ${error.message}</p>`;
+        showErrorMessage(`Error fetching news: ${error.message}`);
     }
 }
 
+// Helper functions
+function updateNewsHeading(text) {
+    const newsHeading = document.querySelector('#news h2');
+    if (newsHeading) newsHeading.textContent = text;
+}
+
+function showLoadingMessage(msg) {
+    newsContainer.innerHTML = `<div class="loading-spinner"><p>${msg}</p></div>`;
+}
+
+function showErrorMessage(msg) {
+    newsContainer.innerHTML = `<p class="error">${msg}</p>`;
+}
+
+function handleResponse(response) {
+    if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return response.json().then(data => displayNews(data.data));
+}
+
+function getCountryCode(countryName) {
+    const countryCodes = {
+        'usa': 'us',
+        'united states': 'us',
+        'sweden': 'se',
+        // أضف المزيد من الدول حسب الحاجة
+    };
+    return countryCodes[countryName.toLowerCase()] || 'us';
+}
+
 /**
- * Displays the news articles in the `newsContainer` element.
- * 
- * @function displayNews
- * @param {Array} articles - An array of news article objects.
+ * Displays news articles
+ * @param {Array} articles - Array of news articles
  */
 function displayNews(articles) {
-    if (!newsContainer) return;
-    
-    // If no articles are found, display a message
-    if (!articles || articles.length === 0) {
+    if (!articles?.length) {
         newsContainer.innerHTML = "<p>No news articles found.</p>";
         return;
     }
 
-    // Display up to 12 articles in the container
-    newsContainer.innerHTML = articles
-        .slice(0, 12) // Display only the first 12 articles
-        .map(article => `
-            <div class="news-article">
-                <img src="${article.urlToImage || 'https://via.placeholder.com/300?text=No+Image'}" alt="News Image">
-                <div class="news-content">
-                    <h3><a href="${article.url}" target="_blank">${article.title || "No title available"}</a></h3>
-                    <p>${article.description ? article.description.substring(0, 80)  + '...' : "No description available."}</p>
-                    <p><strong>Source:</strong> ${article.source.name || "Unknown"} | <strong>Date:</strong> ${new Date(article.publishedAt).toLocaleDateString()}</p>
-                </div>
+    newsContainer.innerHTML = articles.slice(0, 12).map(article => ` 
+        <article class="news-article">
+            <img src="${article.image || 'https://via.placeholder.com/300?text=No+Image'}" 
+                 alt="${article.title || 'News image'}">
+            <div class="news-content">
+                <h3><a href="${article.url}" target="_blank" rel="noopener noreferrer">
+                    ${article.title || "No title available"}
+                </a></h3>
+                <p>${article.description?.substring(0, 100) || "No description available"}...</p>
+                <footer>
+                    <span>${article.source?.name || "Unknown source"}</span>
+                    <time>${new Date(article.published_at).toLocaleDateString()}</time>
+                </footer>
             </div>
-        `).join('');
+        </article>
+    `).join('');
 }
 
-/**
- * Event listener that runs once the DOM content is loaded.
- * It initializes the news module.
- * 
- * @event document#DOMContentLoaded
- */
-document.addEventListener('DOMContentLoaded', () => {
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initNewsModule);
+} else {
     initNewsModule();
-});
+}
 
-// Export functions for use in other modules
 export { fetchNewsForCountry };

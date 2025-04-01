@@ -2,7 +2,6 @@ import { initMap, getSelectedCountry } from './map.js';
 import { renderCharts } from './charts.js';
 import { fetchNewsForCountry } from './news.js';
 
-
 document.addEventListener('DOMContentLoaded', () => {
     // إدارة القائمة على جميع الصفحات
     const menuIcon = document.querySelector('.menu-icon');
@@ -35,33 +34,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (currentPage === 'map.html') {
         initMap();
         
-        // إضافة زر للانتقال إلى صفحة الأخبار مع الدولة المحددة
         document.addEventListener('countrySelected', (event) => {
-            if (event.detail && event.detail.country) {
-                // إنشاء زر للانتقال إلى صفحة الأخبار
+            if (event.detail?.country) {
                 const mapSection = document.getElementById('map');
                 if (mapSection) {
-                    // التحقق من وجود زر الانتقال
-                    let newsButton = document.getElementById('goToNewsButton');
-                    if (!newsButton) {
-                        newsButton = document.createElement('button');
-                        newsButton.id = 'goToNewsButton';
-                        newsButton.className = 'btn';
-                        newsButton.style.marginTop = '20px';
-                        newsButton.style.padding = '10px 20px';
-                        newsButton.style.backgroundColor = '#FF6500';
-                        newsButton.style.color = 'white';
-                        newsButton.style.border = 'none';
-                        newsButton.style.borderRadius = '5px';
-                        newsButton.style.cursor = 'pointer';
-                        mapSection.appendChild(newsButton);
-                    }
+                    let newsButton = document.getElementById('goToNewsButton') || 
+                        createNewsButton(mapSection);
                     
                     newsButton.textContent = `View All News for ${event.detail.country}`;
                     newsButton.onclick = () => {
-                        // تخزين الدولة المحددة في localStorage
                         localStorage.setItem('selectedCountry', event.detail.country);
-                        // الانتقال إلى صفحة الأخبار
                         window.location.href = 'news.html';
                     };
                 }
@@ -70,16 +52,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     if (currentPage === 'news.html') {
-        // التحقق من وجود دولة محددة في localStorage
         const selectedCountry = localStorage.getItem('selectedCountry');
         if (selectedCountry) {
-            // استدعاء وظيفة البحث عن أخبار للدولة المحددة
             setTimeout(() => {
                 document.dispatchEvent(new CustomEvent('countrySelected', {
                     detail: { country: selectedCountry },
                     bubbles: true
                 }));
-                // مسح الدولة المحددة من localStorage بعد استخدامها
                 localStorage.removeItem('selectedCountry');
             }, 500);
         }
@@ -87,14 +66,39 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (currentPage === 'statistics.html') renderCharts();
 });
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register(new URL('../sw.js', import.meta.url), {
-            scope: '/',
-            type: 'module'
-          })
-        .then(reg => console.log('SW registered:', reg))
-        .catch(err => console.log('SW registration failed:', err));
+
+// وظيفة مساعدة لإنشاء زر الأخبار
+function createNewsButton(container) {
+    const button = document.createElement('button');
+    button.id = 'goToNewsButton';
+    button.className = 'btn';
+    Object.assign(button.style, {
+        marginTop: '20px',
+        padding: '10px 20px',
+        backgroundColor: '#FF6500',
+        color: 'white',
+        border: 'none',
+        borderRadius: '5px',
+        cursor: 'pointer'
     });
-  }
-  
+    container.appendChild(button);
+    return button;
+}
+
+// تسجيل Service Worker (منفصل عن DOMContentLoaded)
+window.addEventListener('load', () => {
+    if ('serviceWorker' in navigator) {
+        const swUrl = new URL('sw.js', import.meta.url).href;
+        navigator.serviceWorker.register(swUrl, {
+            scope: '/hanan66/',
+            type: 'module'
+        })
+        .then(reg => {
+            console.log('Service Worker registered with scope:', reg.scope);
+            
+            // التحقق من التحديثات كل ساعة
+            setInterval(() => reg.update(), 60 * 60 * 1000);
+        })
+        .catch(err => console.error('Service Worker registration failed:', err));
+    }
+});
