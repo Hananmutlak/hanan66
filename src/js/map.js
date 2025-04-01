@@ -8,8 +8,18 @@
 
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-// استيراد المفاتيح من ملف التهيئة
-import { config } from '/src/js/config.js';
+
+/**
+ * API key for OpenWeatherMap service.
+ * @constant {string}
+ */
+const WEATHER_API_KEY = '5185650ef9d376a4d394a0d06125bda7'; // المفتاح الخاص بـ OpenWeatherMap
+
+/**
+ * API key for AirVisual service.
+ * @constant {string}
+ */
+const AIRVISUAL_API_KEY = '762bc8c7-2bfd-416f-b427-8fbaab8832c5'; // المفتاح الخاص بـ AirVisual
 
 /**
  * Global variable to store the Leaflet map instance.
@@ -24,18 +34,6 @@ let map;
 let selectedCountry = '';
 
 /**
- * API key for OpenWeatherMap service.
- * @constant {string}
- */
-const WEATHER_API_KEY = config.WEATHER_API_KEY;
-
-/**
- * API key for AirVisual service.
- * @constant {string}
- */
-const AIRVISUAL_API_KEY = config.AIRVISUAL_API_KEY;
-
-/**
  * Custom event triggered when a country is selected on the map.
  * @event countrySelected
  * @type {CustomEvent}
@@ -46,7 +44,6 @@ const countrySelectedEvent = new CustomEvent('countrySelected', {
   detail: { country: '' },
   bubbles: true
 });
-
 /**
  * Initializes the map and related functionalities.
  * This function checks if the DOM is fully loaded before initializing the map.

@@ -160,11 +160,11 @@
       });
     }
   }
-})({"2xfHA":[function(require,module,exports,__globalThis) {
+})({"93v64":[function(require,module,exports,__globalThis) {
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
-var HMR_SERVER_PORT = 52086;
+var HMR_SERVER_PORT = 1234;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "439701173a9199ea";
 var HMR_USE_SSE = false;
@@ -772,8 +772,14 @@ parcelHelpers.defineInteropFlag(exports);
 var _leaflet = require("leaflet");
 var _leafletDefault = parcelHelpers.interopDefault(_leaflet);
 var _leafletCss = require("leaflet/dist/leaflet.css");
-// استيراد المفاتيح من ملف التهيئة
-var _configJs = require("/src/js/config.js");
+/**
+ * API key for OpenWeatherMap service.
+ * @constant {string}
+ */ const WEATHER_API_KEY = '5185650ef9d376a4d394a0d06125bda7'; // المفتاح الخاص بـ OpenWeatherMap
+/**
+ * API key for AirVisual service.
+ * @constant {string}
+ */ const AIRVISUAL_API_KEY = '762bc8c7-2bfd-416f-b427-8fbaab8832c5'; // المفتاح الخاص بـ AirVisual
 /**
  * Global variable to store the Leaflet map instance.
  * @type {L.Map}
@@ -782,14 +788,6 @@ var _configJs = require("/src/js/config.js");
  * Global variable to store the currently selected country.
  * @type {string}
  */ let selectedCountry = '';
-/**
- * API key for OpenWeatherMap service.
- * @constant {string}
- */ const WEATHER_API_KEY = (0, _configJs.config).WEATHER_API_KEY;
-/**
- * API key for AirVisual service.
- * @constant {string}
- */ const AIRVISUAL_API_KEY = (0, _configJs.config).AIRVISUAL_API_KEY;
 /**
  * Custom event triggered when a country is selected on the map.
  * @event countrySelected
@@ -1094,7 +1092,7 @@ function getSelectedCountry() {
     return selectedCountry;
 }
 
-},{"leaflet":"gzvEd","leaflet/dist/leaflet.css":"6JhOO","/src/js/config.js":"2hPh4","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"gzvEd":[function(require,module,exports,__globalThis) {
+},{"leaflet":"gzvEd","leaflet/dist/leaflet.css":"6JhOO","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"gzvEd":[function(require,module,exports,__globalThis) {
 /* @preserve
  * Leaflet 1.9.4, a JS library for interactive maps. https://leafletjs.com
  * (c) 2010-2023 Vladimir Agafonkin, (c) 2010-2011 CloudMade
@@ -11690,17 +11688,7 @@ function getSelectedCountry() {
     window.L = exports1;
 });
 
-},{}],"6JhOO":[function() {},{}],"2hPh4":[function(require,module,exports,__globalThis) {
-// config.js
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "config", ()=>config);
-const config = {
-    WEATHER_API_KEY: '5185650ef9d376a4d394a0d06125bda7',
-    AIRVISUAL_API_KEY: '762bc8c7-2bfd-416f-b427-8fbaab8832c5'
-};
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"WUUf9":[function(require,module,exports,__globalThis) {
+},{}],"6JhOO":[function() {},{}],"WUUf9":[function(require,module,exports,__globalThis) {
 /**
  * @module ChartModule
  * @description يتعامل مع إنشاء وعرض مخططات البيانات لإحصائيات الأمراض
@@ -25296,6 +25284,6 @@ function index_esm(input) {
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"4iTwc":[function(require,module,exports,__globalThis) {
 module.exports = module.bundle.resolve("sw.5182e6ed.js");
 
-},{}]},["2xfHA","lhpGb"], "lhpGb", "parcelRequire5828", {}, "./", "/")
+},{}]},["93v64","lhpGb"], "lhpGb", "parcelRequire5828", {}, "./", "/")
 
 //# sourceMappingURL=projecthanan.b828852a.js.map

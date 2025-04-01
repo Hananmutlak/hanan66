@@ -88,18 +88,18 @@ footer {
 }
 
 .floating-germs .germ:first-child {
-  top: 3%;
-  left: 17%;
+  top: 52%;
+  left: 50%;
 }
 
 .floating-germs .germ:nth-child(2) {
-  top: 16%;
-  left: 75%;
+  top: 56%;
+  left: 47%;
 }
 
 .floating-germs .germ:nth-child(3) {
-  top: 29%;
-  left: 45%;
+  top: 35%;
+  left: 79%;
 }
 
 .prevention-cards {
