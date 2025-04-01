@@ -9,7 +9,7 @@
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 // استيراد المفاتيح من ملف التهيئة
-import config from './config.js';
+import { config } from './config.js';
 
 /**
  * Global variable to store the Leaflet map instance.
