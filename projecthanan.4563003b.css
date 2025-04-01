@@ -215,79 +215,86 @@
   box-shadow: 0 2px 4px #0003;
 }
 
-.news-container {
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  padding: 20px;
-  display: flex;
-}
-
-.news-article {
+.news-card {
   background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  flex-direction: column;
-  flex: calc(25% - 40px);
-  justify-content: space-between;
-  max-width: 250px;
-  transition: transform .3s ease-in-out, box-shadow .3s ease-in-out;
-  animation: .5s ease-in-out fadeIn;
-  display: flex;
-  overflow: hidden;
-  box-shadow: 2px 2px 10px #0000001a;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  grid-template-columns: 200px 1fr;
+  gap: 1rem;
+  margin: 1rem 0;
+  padding: 1rem;
+  display: grid;
+  box-shadow: 0 2px 4px #0000001a;
 }
 
-.news-article:hover {
-  transform: scale(1.05);
-  box-shadow: 4px 4px 15px #0003;
-}
-
-.news-article img {
+.news-card img {
   object-fit: cover;
+  border-radius: 4px;
   width: 100%;
-  height: 120px;
+  height: 150px;
 }
 
-.news-content {
+.news-card .content {
   flex-direction: column;
-  flex-grow: 1;
-  justify-content: space-between;
-  padding: 10px;
+  gap: .5rem;
   display: flex;
 }
 
-.news-content h3 {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  height: 40px;
-  margin: 0 0 8px;
-  font-size: 14px;
-  overflow: hidden;
+.news-card h3 {
+  margin: 0;
+  font-size: 1.2rem;
 }
 
-.news-content p {
-  color: #555;
-  text-overflow: ellipsis;
-  height: 40px;
-  margin: 0 0 5px;
-  font-size: 12px;
-  overflow: hidden;
-}
-
-.news-content a {
-  color: #007bff;
-  font-size: 12px;
+.news-card h3 a {
+  color: #2c3e50;
   text-decoration: none;
 }
 
-.news-content a:hover {
+.news-card h3 a:hover {
   text-decoration: underline;
 }
 
-.error {
-  color: red;
+.meta {
+  color: #666;
+  justify-content: space-between;
+  font-size: .9em;
+  display: flex;
+}
+
+.loading {
   text-align: center;
+  padding: 2rem;
+}
+
+.spinner {
+  border: 4px solid #f3f3f3;
+  border-top-color: #3498db;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin: 0 auto;
+  animation: 1s linear infinite spin;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.error {
+  color: #e74c3c;
+  text-align: center;
+  padding: 2rem;
+}
+
+.error i {
+  margin-bottom: 1rem;
+  font-size: 2em;
 }
 
 @media (width <= 768px) {

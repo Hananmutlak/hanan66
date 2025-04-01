@@ -160,11 +160,11 @@
       });
     }
   }
-})({"fN3xd":[function(require,module,exports,__globalThis) {
+})({"c73Dv":[function(require,module,exports,__globalThis) {
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
-var HMR_SERVER_PORT = 58593;
+var HMR_SERVER_PORT = 1234;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "439701173a9199ea";
 var HMR_USE_SSE = false;
@@ -669,57 +669,204 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 },{}],"hlJHp":[function(require,module,exports,__globalThis) {
 /**
  * @module NewsModule
- * @description Handles fetching and displaying health-related news
- */ const NEWS_API_KEY = 'YOUR_GNEWS_API_KEY';
+ * @description A module to fetch and display news from various sources.
+ */ // The container where news will be displayed
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "NewsModule", ()=>NewsModule);
 const newsContainer = document.getElementById('newsContainer');
-function initNewsModule() {
-    fetchNews();
+// Available news sources
+const NEWS_SOURCES = [
+    fetchRedditNews,
+    fetchBBCNews,
+    fetchWikipediaNews
+];
+/**
+ * Initializes the news module by showing loading state and fetching combined news.
+ */ function initNewsModule() {
+    showLoading();
+    fetchCombinedNews();
 }
-async function fetchNews() {
-    if (!newsContainer) return;
-    showLoadingMessage("Loading latest health news...");
+/**
+ * Fetches news from all available sources and handles errors using Promise.any.
+ */ async function fetchCombinedNews() {
     try {
-        const url = `https://gnews.io/api/v4/top-headlines?category=health&lang=en&max=10&apikey=${NEWS_API_KEY}`;
-        const response = await fetch(url);
-        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-        const data = await response.json();
-        displayNews(data.articles);
-    } catch (error) {
-        showErrorMessage(`Error fetching news: ${error.message}`);
+        const articles = await Promise.any(NEWS_SOURCES.map((fn)=>fn()));
+        displayNews(articles);
+        localStorage.setItem('cachedNews', JSON.stringify(articles));
+    } catch (err) {
+        showError('Failed to connect to news sources. Displaying cached data.');
+        loadCachedNews();
     }
 }
-function showLoadingMessage(msg) {
-    newsContainer.innerHTML = `<div class="loading-spinner"><p>${msg}</p></div>`;
-}
-function showErrorMessage(msg) {
-    newsContainer.innerHTML = `<p class="error">${msg}</p>`;
-}
-function displayNews(articles) {
-    if (!articles?.length) {
-        newsContainer.innerHTML = "<p>No news articles found.</p>";
-        return;
+/**
+ * Fetches news filtered by a specific country name.
+ * @param {string} country - The name of the country to filter news for.
+ */ async function fetchNewsForCountry(country) {
+    try {
+        showLoading();
+        const articles = await Promise.any(NEWS_SOURCES.map((fn)=>fn()));
+        const filteredArticles = articles.filter((article)=>article.title.toLowerCase().includes(country.toLowerCase()) || article.description.toLowerCase().includes(country.toLowerCase()));
+        displayNews(filteredArticles.length > 0 ? filteredArticles : articles);
+    } catch (err) {
+        showError('Failed to connect to news sources. Displaying cached data.');
+        loadCachedNews();
     }
-    newsContainer.innerHTML = articles.map((article)=>` 
-        <article class="news-article">
-            <img src="${article.image || './assets/images/news-placeholder.jpg'}" 
-                 alt="${article.title || 'News image'}"
-                 onerror="this.src='./assets/images/news-placeholder.jpg'">
-            <div class="news-content">
-                <h3><a href="${article.url}" target="_blank" rel="noopener noreferrer">
-                    ${article.title || "No title available"}
-                </a></h3>
-                <p>${article.description?.substring(0, 100) || "No description available"}...</p>
-                <footer>
-                    <span>${article.source?.name || "Unknown source"}</span>
-                    <time>${new Date(article.publishedAt).toLocaleDateString()}</time>
-                </footer>
-            </div>
-        </article>
-    `).join('');
 }
-if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initNewsModule);
+/**
+ * Fetches news from Reddit's health subreddit.
+ * @returns {Promise<Object[]>} An array of news articles.
+ * @throws Will throw an error if fetching fails.
+ */ async function fetchRedditNews() {
+    try {
+        const res = await fetch('https://www.reddit.com/r/health/top.json?limit=10');
+        const data = await res.json();
+        return data.data.children.map((post)=>({
+                title: post.data.title,
+                description: post.data.selftext,
+                url: `https://reddit.com${post.data.permalink}`,
+                image: post.data.thumbnail || './assets/images/news-placeholder.jpg',
+                date: new Date(post.data.created_utc * 1000),
+                source: 'Reddit'
+            }));
+    } catch  {
+        throw new Error('Reddit failed');
+    }
+}
+/**
+ * Fetches news from BBC via RSS feed.
+ * @returns {Promise<Object[]>} An array of news articles.
+ * @throws Will throw an error if fetching fails.
+ */ async function fetchBBCNews() {
+    try {
+        const proxy = 'https://api.allorigins.win/raw?url=';
+        const rssUrl = 'https://feeds.bbci.co.uk/news/health/rss.xml';
+        const res = await fetch(proxy + encodeURIComponent(rssUrl));
+        const text = await res.text();
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(text, "text/xml");
+        const items = xml.querySelectorAll('item');
+        return Array.from(items).map((item)=>({
+                title: item.querySelector('title').textContent,
+                description: item.querySelector('description').textContent,
+                url: item.querySelector('link').textContent,
+                image: item.querySelector('media\\:thumbnail, thumbnail')?.getAttribute('url') || './assets/images/news-placeholder.jpg',
+                date: new Date(item.querySelector('pubDate').textContent),
+                source: 'BBC News'
+            }));
+    } catch  {
+        throw new Error('BBC failed');
+    }
+}
+/**
+ * Fetches current events from Wikipedia.
+ * @returns {Promise<Object[]>} An array of news articles.
+ * @throws Will throw an error if fetching fails.
+ */ async function fetchWikipediaNews() {
+    try {
+        const res = await fetch('https://en.wikipedia.org/api/rest_v1/page/html/Portal:Current_events');
+        const html = await res.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        const events = doc.querySelectorAll('.vevent');
+        return Array.from(events).map((event)=>({
+                title: event.querySelector('.summary')?.textContent.trim() || "\u062D\u062F\u062B \u062C\u0627\u0631\u064A",
+                description: event.textContent.trim(),
+                url: 'https://en.wikipedia.org/wiki/Portal:Current_events',
+                image: './assets/images/news-placeholder.jpg',
+                date: new Date(),
+                source: 'Wikipedia'
+            }));
+    } catch  {
+        throw new Error('Wikipedia failed');
+    }
+}
+/**
+ * Displays news articles in the news container.
+ * @param {Object[]} articles - An array of news articles to display.
+ */ function displayNews(articles) {
+    if (!articles?.length) return showError('No news available');
+    newsContainer.innerHTML = articles.slice(0, 10).map((article)=>`
+    <article class="news-card">
+      <img src="${article.image}" alt="${article.title}" 
+           onerror="this.src='./assets/images/news-placeholder.jpg'">
+      <div class="content">
+        <h3><a href="${article.url}" target="_blank">${article.title}</a></h3>
+        <p>${article.description.substring(0, 150)}...</p>
+        <div class="meta">
+          <span class="source">${article.source}</span>
+          <time>${article.date.toLocaleDateString()}</time>
+        </div>
+      </div>
+    </article>
+  `).join('');
+}
+/**
+ * Loads cached news from localStorage.
+ */ function loadCachedNews() {
+    const cached = localStorage.getItem('cachedNews');
+    if (cached) displayNews(JSON.parse(cached));
+}
+/**
+ * Shows a loading spinner while fetching news.
+ */ function showLoading() {
+    newsContainer.innerHTML = `
+    <div class="loading">
+      <div class="spinner"></div>
+      <p>Loading news...</p>
+    </div>
+  `;
+}
+/**
+ * Displays an error message in the news container.
+ * @param {string} msg - The error message to display.
+ */ function showError(msg) {
+    newsContainer.innerHTML = `
+    <div class="error">
+      <i class="fas fa-exclamation-triangle"></i>
+      <p>${msg}</p>
+    </div>
+  `;
+}
+const NewsModule = {
+    init: initNewsModule,
+    fetchNewsForCountry
+};
+/**
+ * Initializes the news module when the DOM is fully loaded.
+ */ if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initNewsModule);
 else initNewsModule();
 
-},{}]},["fN3xd","hlJHp"], "hlJHp", "parcelRequire5828", {})
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"jnFvT":[function(require,module,exports,__globalThis) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, '__esModule', {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === 'default' || key === '__esModule' || Object.prototype.hasOwnProperty.call(dest, key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
+
+},{}]},["c73Dv","hlJHp"], "hlJHp", "parcelRequire5828", {})
 
 //# sourceMappingURL=news.6a63a89d.js.map
