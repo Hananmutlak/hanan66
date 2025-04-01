@@ -191,9 +191,9 @@ export function initMap() {
     
     try {
       // Use the NewsAPI to fetch news related to diseases in the selected country
-      const apiKey = '8cf220f2e3f548b78aa38afc2f12b039';
+      const apiKey = '6757b6f31a9eb5abba3c0fd90dcef209';
       const query = `(disease OR pandemic OR outbreak OR virus OR infection) AND ${country}`;
-      const url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(query) }&language=en&sortBy=publishedAt&apiKey=${apiKey}`;
+      const url = `https://api.mediastack.com/v1/news?access_key=${apiKey}&languages=en&categories=health`;
       
       const response = await fetch(url);
       
