@@ -160,7 +160,7 @@
       });
     }
   }
-})({"fN3xd":[function(require,module,exports,__globalThis) {
+})({"CtfwU":[function(require,module,exports,__globalThis) {
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
@@ -168,7 +168,7 @@ var HMR_SERVER_PORT = 58593;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "439701173a9199ea";
 var HMR_USE_SSE = false;
-module.bundle.HMR_BUNDLE_ID = "6cb6da6a6a63a89d";
+module.bundle.HMR_BUNDLE_ID = "117fb0ab5182e6ed";
 "use strict";
 /* global HMR_HOST, HMR_PORT, HMR_SERVER_PORT, HMR_ENV_HASH, HMR_SECURE, HMR_USE_SSE, chrome, browser, __parcel__import__, __parcel__importScripts__, ServiceWorkerGlobalScope */ /*::
 import type {
@@ -666,60 +666,146 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
     }
 }
 
-},{}],"hlJHp":[function(require,module,exports,__globalThis) {
-/**
- * @module NewsModule
- * @description Handles fetching and displaying health-related news
- */ const NEWS_API_KEY = 'YOUR_GNEWS_API_KEY';
-const newsContainer = document.getElementById('newsContainer');
-function initNewsModule() {
-    fetchNews();
-}
-async function fetchNews() {
-    if (!newsContainer) return;
-    showLoadingMessage("Loading latest health news...");
-    try {
-        const url = `https://gnews.io/api/v4/top-headlines?category=health&lang=en&max=10&apikey=${NEWS_API_KEY}`;
-        const response = await fetch(url);
-        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-        const data = await response.json();
-        displayNews(data.articles);
-    } catch (error) {
-        showErrorMessage(`Error fetching news: ${error.message}`);
-    }
-}
-function showLoadingMessage(msg) {
-    newsContainer.innerHTML = `<div class="loading-spinner"><p>${msg}</p></div>`;
-}
-function showErrorMessage(msg) {
-    newsContainer.innerHTML = `<p class="error">${msg}</p>`;
-}
-function displayNews(articles) {
-    if (!articles?.length) {
-        newsContainer.innerHTML = "<p>No news articles found.</p>";
+},{}],"jMyWQ":[function(require,module,exports,__globalThis) {
+/// <reference lib="WebWorker" />
+const self = globalThis.self;
+const CACHE_NAME = 'hanan66-final-v3';
+const API_CACHE_NAME = 'hanan66-api-v1';
+const OFFLINE_URL = './offline.html';
+const CACHE_URLS = [
+    './',
+    './index.html',
+    './statistics.html',
+    './map.html',
+    './prevention.html',
+    './contact.html',
+    './news.html',
+    './css/main.css',
+    './js/main.js',
+    './js/map.js',
+    './js/news.js',
+    './js/charts.js',
+    './assets/images/hero-bg.jpg',
+    './assets/images/virus1.svg',
+    './assets/images/virus1.png',
+    './assets/images/news-placeholder.jpg'
+];
+// ===== التثبيت =====
+self.addEventListener('install', (event)=>{
+    event.waitUntil(caches.open(CACHE_NAME).then((cache)=>{
+        console.log('[SW] Caching app shell');
+        const cachePromises = CACHE_URLS.map((url)=>{
+            return fetch(new Request(url, {
+                credentials: 'same-origin',
+                redirect: 'follow',
+                mode: 'no-cors'
+            })).then((response)=>{
+                if (response.ok || response.type === 'opaque') return cache.put(url, response);
+                console.warn(`[SW] Failed to cache ${url}`);
+                return Promise.resolve();
+            }).catch((err)=>{
+                console.warn(`[SW] Skipping ${url}:`, err);
+                return Promise.resolve();
+            });
+        });
+        return Promise.all(cachePromises);
+    }).then(()=>{
+        console.log('[SW] Skip waiting');
+        return self.skipWaiting();
+    }));
+});
+// ===== التنشيط =====
+self.addEventListener('activate', (event)=>{
+    event.waitUntil(caches.keys().then((cacheNames)=>{
+        return Promise.all(cacheNames.filter((name)=>name !== CACHE_NAME && name !== API_CACHE_NAME).map((name)=>{
+            console.log(`[SW] Deleting old cache: ${name}`);
+            return caches.delete(name);
+        }));
+    }).then(()=>{
+        console.log('[SW] Claiming clients');
+        return self.clients.claim();
+    }));
+});
+// ===== معالجة الطلبات =====
+self.addEventListener('fetch', (event)=>{
+    const request = event.request;
+    // تخطي طلبات غير GET
+    if (request.method !== 'GET') return;
+    // معالجة طلبات API
+    if (isApiRequest(request)) {
+        event.respondWith(handleApiRequest(request));
         return;
     }
-    newsContainer.innerHTML = articles.map((article)=>` 
-        <article class="news-article">
-            <img src="${article.image || './assets/images/news-placeholder.jpg'}" 
-                 alt="${article.title || 'News image'}"
-                 onerror="this.src='./assets/images/news-placeholder.jpg'">
-            <div class="news-content">
-                <h3><a href="${article.url}" target="_blank" rel="noopener noreferrer">
-                    ${article.title || "No title available"}
-                </a></h3>
-                <p>${article.description?.substring(0, 100) || "No description available"}...</p>
-                <footer>
-                    <span>${article.source?.name || "Unknown source"}</span>
-                    <time>${new Date(article.publishedAt).toLocaleDateString()}</time>
-                </footer>
-            </div>
-        </article>
-    `).join('');
+    // معالجة الملفات الثابتة
+    event.respondWith(caches.match(request).then((cached)=>cached || fetchAndCache(request)).catch(()=>fallbackResponse(request)));
+});
+// ===== دوال مساعدة =====
+function isApiRequest(request) {
+    return request.url.includes('newsapi.org') || request.url.includes('disease.sh') || request.url.includes('gnews.io');
 }
-if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initNewsModule);
-else initNewsModule();
+async function handleApiRequest(request) {
+    try {
+        // تحويل HTTP إلى HTTPS
+        const secureRequest = request.url.startsWith('http:') ? new Request(request.url.replace('http://', 'https://'), request) : request;
+        const response = await fetch(secureRequest);
+        if (response.ok) {
+            const cache = await caches.open(API_CACHE_NAME);
+            await cache.put(request, response.clone());
+        }
+        return response;
+    } catch (err) {
+        console.error('[SW] API request failed:', err);
+        const cached = await caches.match(request);
+        return cached || apiErrorResponse();
+    }
+}
+async function fetchAndCache(request) {
+    try {
+        const response = await fetch(request);
+        if (response.ok) {
+            const cache = await caches.open(CACHE_NAME);
+            await cache.put(request, response.clone());
+        }
+        return response;
+    } catch (err) {
+        console.error('[SW] Fetch failed:', err);
+        throw err;
+    }
+}
+function fallbackResponse(request) {
+    if (request.mode === 'navigate') return caches.match(OFFLINE_URL) || offlinePageResponse();
+    return offlineDataResponse();
+}
+function apiErrorResponse() {
+    return new Response(JSON.stringify({
+        error: 'Network error'
+    }), {
+        status: 503,
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+}
+function offlinePageResponse() {
+    return new Response('<h1>Offline</h1><p>You are currently offline</p>', {
+        headers: {
+            'Content-Type': 'text/html'
+        }
+    });
+}
+function offlineDataResponse() {
+    return new Response('Offline', {
+        status: 503
+    });
+}
+// ===== معالجة الرسائل =====
+self.addEventListener('message', (event)=>{
+    if (event.data === 'skipWaiting') {
+        console.log('[SW] Skipping waiting');
+        self.skipWaiting();
+    }
+});
 
-},{}]},["fN3xd","hlJHp"], "hlJHp", "parcelRequire5828", {})
+},{}]},["CtfwU","jMyWQ"], "jMyWQ", "parcelRequire5828", {})
 
-//# sourceMappingURL=news.6a63a89d.js.map
+//# sourceMappingURL=sw.5182e6ed.js.map
