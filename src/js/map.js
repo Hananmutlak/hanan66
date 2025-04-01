@@ -1,31 +1,60 @@
 /**
- * @module MapIntegration
- * @description Enhanced Leaflet map implementation with news, weather and air quality integration
+ * @file map.js
+ * @description This file contains the implementation of an interactive map with integrated weather, air quality, and news data.
+ * It uses Leaflet.js for map rendering and integrates external APIs for additional data.
  * @requires leaflet
  * @requires leaflet/dist/leaflet.css
  */
 
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+// استيراد المفاتيح من ملف التهيئة
+import config from './config.js';
 
-// API Keys (should be stored securely in production)
-const WEATHER_API_KEY = '5185650ef9d376a4d394a0d06125bda7';
-const AIRVISUAL_API_KEY = '762bc8c7-2bfd-416f-b427-8fbaab8832c5';
-
-// Store the map instance and selected country globally
+/**
+ * Global variable to store the Leaflet map instance.
+ * @type {L.Map}
+ */
 let map;
+
+/**
+ * Global variable to store the currently selected country.
+ * @type {string}
+ */
 let selectedCountry = '';
 
 /**
- * Custom event for country selection
+ * API key for OpenWeatherMap service.
+ * @constant {string}
+ */
+const WEATHER_API_KEY = config.WEATHER_API_KEY;
+
+/**
+ * API key for AirVisual service.
+ * @constant {string}
+ */
+const AIRVISUAL_API_KEY = config.AIRVISUAL_API_KEY;
+
+/**
+ * Custom event triggered when a country is selected on the map.
+ * @event countrySelected
  * @type {CustomEvent}
+ * @property {Object} detail - Event details.
+ * @property {string} detail.country - The name of the selected country.
  */
 const countrySelectedEvent = new CustomEvent('countrySelected', {
   detail: { country: '' },
   bubbles: true
 });
 
+/**
+ * Initializes the map and related functionalities.
+ * This function checks if the DOM is fully loaded before initializing the map.
+ */
 export function initMap() {
+  /**
+   * Checks if the DOM is fully loaded and initializes the map accordingly.
+   */
   function checkDOM() {
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', initialize);
@@ -34,10 +63,12 @@ export function initMap() {
     }
   }
 
+  /**
+   * Initializes the map, sets up markers, and creates info containers.
+   */
   function initialize() {
     const mapContainer = document.getElementById('mapContainer');
     if (!mapContainer) throw new Error('Map container not found');
-
     fixLeafletIcons();
     map = initBaseMap(mapContainer);
     loadCovidData(map).catch(handleDataError);
@@ -45,6 +76,9 @@ export function initMap() {
     createInfoContainers();
   }
 
+  /**
+   * Creates additional containers for weather, air quality, and news information.
+   */
   function createInfoContainers() {
     const mapSection = document.getElementById('map');
     if (!mapSection) return;
@@ -70,8 +104,22 @@ export function initMap() {
       </div>
     `;
     mapSection.appendChild(airQualitySection);
+
+    // Create news container
+    const newsSection = document.createElement('section');
+    newsSection.id = 'country-news';
+    newsSection.innerHTML = `
+      <h3 id="newsHeading">News</h3>
+      <div id="newsContainer">
+        <p>Select a country on the map to view related news</p>
+      </div>
+    `;
+    mapSection.appendChild(newsSection);
   }
 
+  /**
+   * Fixes Leaflet's default icon paths to ensure proper display.
+   */
   function fixLeafletIcons() {
     delete L.Icon.Default.prototype._getIconUrl;
     L.Icon.Default.mergeOptions({
@@ -81,6 +129,11 @@ export function initMap() {
     });
   }
 
+  /**
+   * Initializes the base map using Leaflet.
+   * @param {HTMLElement} container - The DOM element to attach the map to.
+   * @returns {L.Map} The initialized Leaflet map instance.
+   */
   function initBaseMap(container) {
     const map = L.map(container).setView([20, 0], 2);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -89,11 +142,14 @@ export function initMap() {
     return map;
   }
 
+  /**
+   * Loads COVID-19 data and creates markers for each country.
+   * @param {L.Map} map - The Leaflet map instance.
+   */
   async function loadCovidData(map) {
     try {
       const response = await fetch('https://disease.sh/v3/covid-19/countries');
       if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-      
       const data = await response.json();
       data.forEach(country => createCountryMarker(map, country));
     } catch (error) {
@@ -101,9 +157,13 @@ export function initMap() {
     }
   }
 
+  /**
+   * Creates a marker for a specific country on the map.
+   * @param {L.Map} map - The Leaflet map instance.
+   * @param {Object} country - The country data object containing latitude, longitude, and statistics.
+   */
   function createCountryMarker(map, country) {
     if (!country.countryInfo?.lat || !country.countryInfo?.long) return;
-
     const marker = L.marker([country.countryInfo.lat, country.countryInfo.long]).addTo(map);
     marker.bindPopup(`
       <b>${country.country}</b><br>
@@ -111,86 +171,78 @@ export function initMap() {
       Deaths: ${country.deaths.toLocaleString()}<br>
       Recovered: ${country.recovered.toLocaleString()}
     `);
-    
     marker.on('click', () => {
       selectedCountry = country.country;
       countrySelectedEvent.detail.country = selectedCountry;
       document.dispatchEvent(countrySelectedEvent);
-      
-      // Fetch weather and air quality data
       fetchWeatherForCountry(selectedCountry);
       fetchAirQualityForCountry(selectedCountry);
     });
   }
 
+  /**
+   * Fetches and displays weather data for the selected country.
+   * @param {string} country - The name of the selected country.
+   */
   async function fetchWeatherForCountry(country) {
     const container = document.getElementById('weatherContainer');
     if (!container) return;
-    
     showLoadingMessage(container, `Loading weather for ${country}...`);
-    
     try {
-      // Get coordinates for the country
       const geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(country)}&limit=1&appid=${WEATHER_API_KEY}`;
       const geoResponse = await fetch(geoUrl);
       const geoData = await geoResponse.json();
-      
       if (!geoData || geoData.length === 0) {
         throw new Error('Country location not found');
       }
-      
       const { lat, lon } = geoData[0];
-      
-      // Get weather data
       const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${WEATHER_API_KEY}`;
       const weatherResponse = await fetch(weatherUrl);
       const weatherData = await weatherResponse.json();
-      
       displayWeather(weatherData, country);
     } catch (error) {
       showErrorMessage(container, `Error fetching weather: ${error.message}`);
     }
   }
 
+  /**
+   * Fetches and displays air quality data for the selected country.
+   * @param {string} country - The name of the selected country.
+   */
   async function fetchAirQualityForCountry(country) {
     const container = document.getElementById('airContainer');
     if (!container) return;
-    
     showLoadingMessage(container, `Loading air quality for ${country}...`);
-    
     try {
-      // Get coordinates for the country (using OpenWeatherMap as AirVisual requires exact coordinates)
       const geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(country)}&limit=1&appid=${WEATHER_API_KEY}`;
       const geoResponse = await fetch(geoUrl);
       const geoData = await geoResponse.json();
-      
       if (!geoData || geoData.length === 0) {
         throw new Error('Country location not found');
       }
-      
       const { lat, lon } = geoData[0];
-      
-      // Get air quality data from AirVisual
       const airUrl = `https://api.airvisual.com/v2/nearest_city?lat=${lat}&lon=${lon}&key=${AIRVISUAL_API_KEY}`;
       const airResponse = await fetch(airUrl);
       const airData = await airResponse.json();
-      
       displayAirQuality(airData);
     } catch (error) {
       showErrorMessage(container, `Error fetching air quality: ${error.message}`);
     }
   }
 
+  /**
+   * Displays weather data in the designated container.
+   * @param {Object} data - The weather data object.
+   * @param {string} country - The name of the selected country.
+   */
   function displayWeather(data, country) {
     const container = document.getElementById('weatherContainer');
     if (!container) return;
-
     const temp = data.main?.temp;
     const description = data.weather?.[0]?.description;
     const iconCode = data.weather?.[0]?.icon;
     const humidity = data.main?.humidity;
     const windSpeed = data.wind?.speed;
-
     container.innerHTML = `
       <div class="weather-card">
         <h4>Weather in ${country}</h4>
@@ -207,16 +259,17 @@ export function initMap() {
     `;
   }
 
+  /**
+   * Displays air quality data in the designated container.
+   * @param {Object} data - The air quality data object.
+   */
   function displayAirQuality(data) {
     const container = document.getElementById('airContainer');
     if (!container) return;
-
     const aqi = data.data?.current?.pollution?.aqius;
     const mainPollutant = data.data?.current?.pollution?.mainus;
     const temperature = data.data?.current?.weather?.tp;
     const humidity = data.data?.current?.weather?.hu;
-
-    // Get AQI level description
     let aqiLevel = '';
     if (aqi <= 50) aqiLevel = 'Good';
     else if (aqi <= 100) aqiLevel = 'Moderate';
@@ -224,7 +277,6 @@ export function initMap() {
     else if (aqi <= 200) aqiLevel = 'Unhealthy';
     else if (aqi <= 300) aqiLevel = 'Very Unhealthy';
     else aqiLevel = 'Hazardous';
-
     container.innerHTML = `
       <div class="air-card">
         <h4>Air Quality Index (AQI)</h4>
@@ -239,6 +291,11 @@ export function initMap() {
     `;
   }
 
+  /**
+   * Returns the CSS class name based on the AQI value.
+   * @param {number} aqi - The Air Quality Index value.
+   * @returns {string} The CSS class name.
+   */
   function getAqiClass(aqi) {
     if (!aqi) return '';
     if (aqi <= 50) return 'good';
@@ -249,14 +306,28 @@ export function initMap() {
     return 'hazardous';
   }
 
+  /**
+   * Displays a loading message in the specified container.
+   * @param {HTMLElement} container - The target container.
+   * @param {string} msg - The loading message.
+   */
   function showLoadingMessage(container, msg) {
     container.innerHTML = `<div class="loading-spinner"><p>${msg}</p></div>`;
   }
 
+  /**
+   * Displays an error message in the specified container.
+   * @param {HTMLElement} container - The target container.
+   * @param {string} msg - The error message.
+   */
   function showErrorMessage(container, msg) {
     container.innerHTML = `<p class="error">${msg}</p>`;
   }
 
+  /**
+   * Handles errors that occur during data loading.
+   * @param {Error} error - The error object.
+   */
   function handleDataError(error) {
     console.error('Data loading error:', error);
     const mapContainer = document.getElementById('mapContainer');
@@ -265,25 +336,31 @@ export function initMap() {
     }
   }
 
+  /**
+   * Sets up the search functionality for the map.
+   * @param {L.Map} map - The Leaflet map instance.
+   */
   function setupSearch(map) {
     const searchInput = document.getElementById('searchInput');
     const searchButton = document.getElementById('searchButton');
-
     if (!searchInput || !searchButton) {
       console.warn('Search elements not found');
       return;
     }
-
     searchButton.addEventListener('click', () => performSearch(map, searchInput));
     searchInput.addEventListener('keypress', (e) => {
       if (e.key === 'Enter') performSearch(map, searchInput);
     });
   }
 
+  /**
+   * Performs a search for a country on the map.
+   * @param {L.Map} map - The Leaflet map instance.
+   * @param {HTMLInputElement} input - The search input element.
+   */
   function performSearch(map, input) {
     const query = input.value.trim().toLowerCase();
     if (!query) return;
-    
     const markers = [];
     map.eachLayer(layer => {
       if (layer instanceof L.Marker) {
@@ -296,7 +373,6 @@ export function initMap() {
         }
       }
     });
-    
     if (markers.length > 0) {
       markers[0].openPopup();
       map.setView(markers[0].getLatLng(), 5);
@@ -308,6 +384,10 @@ export function initMap() {
   checkDOM();
 }
 
+/**
+ * Retrieves the currently selected country.
+ * @returns {string} The name of the selected country.
+ */
 export function getSelectedCountry() {
   return selectedCountry;
 }

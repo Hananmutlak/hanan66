@@ -38,7 +38,7 @@
     <div class="container-overview">
     
         
-            <div class="description">Handles fetching and displaying health-related news with country integration</div>
+            <div class="description">A module to fetch and display news from various sources.</div>
         
 
         
@@ -134,6 +134,72 @@
     
 
     
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id=".NewsModule"><span class="type-signature">(static, constant) </span>NewsModule<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    Exports the NewsModule with initialization and country-specific news fetching functions.
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="news.js.html">news.js</a>, <a href="news.js.html#line189">line 189</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
 
     
         <h3 class="subsection-title">Methods</h3>
@@ -152,7 +218,7 @@
 
 
 <div class="description">
-    Displays the news articles in the `newsContainer` element.
+    Displays news articles in the news container.
 </div>
 
 
@@ -194,7 +260,7 @@
             <td class="type">
             
                 
-<span class="param-type">Array</span>
+<span class="param-type">Array.&lt;Object></span>
 
 
             
@@ -204,7 +270,7 @@
 
             
 
-            <td class="description last">An array of news article objects.</td>
+            <td class="description last">An array of news articles to display.</td>
         </tr>
 
     
@@ -245,7 +311,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="news.js.html">news.js</a>, <a href="news.js.html#line103">line 103</a>
+        <a href="news.js.html">news.js</a>, <a href="news.js.html#line135">line 135</a>
     </li></ul></dd>
     
 
@@ -281,7 +347,7 @@
     
 
     
-    <h4 class="name" id="~fetchNews"><span class="type-signature">(async, inner) </span>fetchNews<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~fetchBBCNews"><span class="type-signature">(async, inner) </span>fetchBBCNews<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;Object>>}</span></h4>
     
 
     
@@ -289,7 +355,7 @@
 
 
 <div class="description">
-    Fetches the latest health-related news using NewsAPI.Displays the news articles in the `newsContainer` element.
+    Fetches news from BBC via RSS feed.
 </div>
 
 
@@ -333,7 +399,129 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="news.js.html">news.js</a>, <a href="news.js.html#line67">line 67</a>
+        <a href="news.js.html">news.js</a>, <a href="news.js.html#line84">line 84</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+    <div class="param-desc">
+    
+        Will throw an error if fetching fails.
+    
+    </div>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    An array of news articles.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;Array.&lt;Object>></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~fetchCombinedNews"><span class="type-signature">(async, inner) </span>fetchCombinedNews<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Fetches news from all available sources and handles errors using Promise.any.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="news.js.html">news.js</a>, <a href="news.js.html#line27">line 27</a>
     </li></ul></dd>
     
 
@@ -377,7 +565,7 @@
 
 
 <div class="description">
-    Fetches news specifically for the selected country
+    Fetches news filtered by a specific country name.
 </div>
 
 
@@ -429,7 +617,7 @@
 
             
 
-            <td class="description last">The country to fetch news for</td>
+            <td class="description last">The name of the country to filter news for.</td>
         </tr>
 
     
@@ -470,7 +658,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="news.js.html">news.js</a>, <a href="news.js.html#line37">line 37</a>
+        <a href="news.js.html">news.js</a>, <a href="news.js.html#line42">line 42</a>
     </li></ul></dd>
     
 
@@ -506,7 +694,7 @@
     
 
     
-    <h4 class="name" id="~handleCountrySelected"><span class="type-signature">(inner) </span>handleCountrySelected<span class="signature">(event)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~fetchRedditNews"><span class="type-signature">(async, inner) </span>fetchRedditNews<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;Object>>}</span></h4>
     
 
     
@@ -514,7 +702,427 @@
 
 
 <div class="description">
-    Handles the country selection event from the map
+    Fetches news from Reddit's health subreddit.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="news.js.html">news.js</a>, <a href="news.js.html#line62">line 62</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+    <div class="param-desc">
+    
+        Will throw an error if fetching fails.
+    
+    </div>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    An array of news articles.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;Array.&lt;Object>></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~fetchWikipediaNews"><span class="type-signature">(async, inner) </span>fetchWikipediaNews<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;Object>>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Fetches current events from Wikipedia.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="news.js.html">news.js</a>, <a href="news.js.html#line111">line 111</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+    <div class="param-desc">
+    
+        Will throw an error if fetching fails.
+    
+    </div>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    An array of news articles.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;Array.&lt;Object>></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~initNewsModule"><span class="type-signature">(inner) </span>initNewsModule<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Initializes the news module by showing loading state and fetching combined news.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="news.js.html">news.js</a>, <a href="news.js.html#line19">line 19</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~loadCachedNews"><span class="type-signature">(inner) </span>loadCachedNews<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Loads cached news from localStorage.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="news.js.html">news.js</a>, <a href="news.js.html#line156">line 156</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~showError"><span class="type-signature">(inner) </span>showError<span class="signature">(msg)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Displays an error message in the news container.
 </div>
 
 
@@ -550,13 +1158,13 @@
 
         <tr>
             
-                <td class="name"><code>event</code></td>
+                <td class="name"><code>msg</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">CustomEvent</span>
+<span class="param-type">string</span>
 
 
             
@@ -566,7 +1174,7 @@
 
             
 
-            <td class="description last">The country selection event</td>
+            <td class="description last">The error message to display.</td>
         </tr>
 
     
@@ -607,7 +1215,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="news.js.html">news.js</a>, <a href="news.js.html#line25">line 25</a>
+        <a href="news.js.html">news.js</a>, <a href="news.js.html#line177">line 177</a>
     </li></ul></dd>
     
 
@@ -643,7 +1251,7 @@
     
 
     
-    <h4 class="name" id="~initNewsModule"><span class="type-signature">(inner) </span>initNewsModule<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~showLoading"><span class="type-signature">(inner) </span>showLoading<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -651,7 +1259,7 @@
 
 
 <div class="description">
-    Initializes the news module and sets up event listeners
+    Shows a loading spinner while fetching news.
 </div>
 
 
@@ -695,7 +1303,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="news.js.html">news.js</a>, <a href="news.js.html#line13">line 13</a>
+        <a href="news.js.html">news.js</a>, <a href="news.js.html#line164">line 164</a>
     </li></ul></dd>
     
 
@@ -741,13 +1349,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-ChartModule.html">ChartModule</a></li><li><a href="module-MapIntegration.html">MapIntegration</a></li><li><a href="module-NewsModule.html">NewsModule</a></li></ul><h3>Events</h3><ul><li><a href="document.html#event:DOMContentLoaded">DOMContentLoaded</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-ChartModule.html">ChartModule</a></li><li><a href="module-NewsModule.html">NewsModule</a></li></ul><h3>Events</h3><ul><li><a href="global.html#event:countrySelected">countrySelected</a></li></ul><h3>Global</h3><ul><li><a href="global.html#AIRVISUAL_API_KEY">AIRVISUAL_API_KEY</a></li><li><a href="global.html#WEATHER_API_KEY">WEATHER_API_KEY</a></li><li><a href="global.html#getSelectedCountry">getSelectedCountry</a></li><li><a href="global.html#initMap">initMap</a></li><li><a href="global.html#map">map</a></li><li><a href="global.html#selectedCountry">selectedCountry</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Mon Mar 31 2025 23:39:24 GMT+0200 (Central European Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Tue Apr 01 2025 18:55:47 GMT+0200 (Central European Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>
